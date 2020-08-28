@@ -1,5 +1,6 @@
 import discord, json
 from discord.ext import commands
+from discord.ext.commands import has_permissions
 
 from cogs.config import get_lang
 
@@ -8,6 +9,7 @@ class setLang(commands.Cog):
         self.client = client
 
     @commands.command()
+    @has_permissions(manage_channels=True)
     async def setLang(self, ctx, *, language=""):
         conf = json.load(open("json/serverconfig.json", 'r'))
 
