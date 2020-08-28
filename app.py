@@ -1,6 +1,6 @@
-# Stellarium v.3.1.0
+# Stellarium
 # Fait pour tourner en version 1.4.1 du module discord.
-versionBot = "v0.0.2"
+versionBot = "v0.0.3"
 
 import discord, asyncio, logging, datetime, json, random, time, os, requests, aiohttp
 from discord.ext import commands, tasks

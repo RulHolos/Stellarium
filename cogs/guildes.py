@@ -17,7 +17,7 @@ class guildes(commands.Cog):
                 creator = ctx.guild.get_member(guildjson[name]["creator"])
                 embed = discord.Embed(colour=guildjson[name]["creatorRoleColor"])
                 embed.set_author(name=f'{guildjson[name]["name"]}, LVL : {guildjson[name]["lvl"]}, EXP : {guildjson[name]["xp"]}')
-                embed.set_footer(text="Stellarium Guild Module, v0.0.2 Alpha")
+                embed.set_footer(text="Stellarium Guild Module, v0.0.3 Alpha")
                 embed.set_thumbnail(url=self.client.get_user(guildjson[name]["creator"]).avatar_url)
 
                 embed.add_field(name="id", value=guildjson[name]["id"], inline=False)
