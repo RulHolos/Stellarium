@@ -3,3 +3,5 @@ ALbot_env/
 logs/
 *.bat
 *.txt
+json/guild.json
+json/serverconfig.json
