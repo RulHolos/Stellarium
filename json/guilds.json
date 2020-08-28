@@ -11,7 +11,7 @@
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
     "lvl": 3,
-    "xp": 200,
+    "xp": 205,
     "private": false,
     "InviteLinks": {
       "7562a2ab-588e-48bc-bc44-7cf64b75552a--7909": "Exists"
@@ -47,7 +47,7 @@
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
     "lvl": 5,
-    "xp": 1170,
+    "xp": 1175,
     "private": true,
     "InviteLinks": {},
     "Items": {},
@@ -62,13 +62,13 @@
     "id": "a5849ccb-5510-44d2-aaf3-85f11fe21411",
     "desc": "",
     "members": {
-      "130313080545607680": 130313080545607680
+      "741125296761208942": 741125296761208942
     },
     "MaxSlots": 5,
-    "creator": 130313080545607680,
+    "creator": 741125296761208942,
     "creatorRoleColor": 10945175,
     "lvl": 1,
-    "xp": 10,
+    "xp": 15,
     "private": false,
     "InviteLinks": {},
     "Items": {},
