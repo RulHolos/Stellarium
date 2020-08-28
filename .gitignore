@@ -3,3 +3,8 @@ ALbot_env/
 logs/
 *.bat
 *.txt
+<<<<<<< HEAD
+=======
+json/guilds.json
+json/serverconfig.json
+>>>>>>> dev
