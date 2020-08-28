@@ -1,7 +1,5 @@
 __pycache__/
 ALbot_env/
 logs/
-json/guilds.json
-json/serverconfig.json
 *.bat
 *.txt
