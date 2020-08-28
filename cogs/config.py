@@ -1,6 +1,8 @@
 import os, json, asyncio, aiohttp
 
-default_prefix = ";"
+
+def get_default_prefix():
+    return ";"
 
 def get_lang(context, field):
     lang = json.load(open("json/lang.json", "r"))
@@ -13,4 +15,4 @@ async def get_prefix(client, message):
     if guild:
         return conf1[str(guild.id)]["prefix"]
     else:
-        return default_prefix
+        return get_default_prefix()
