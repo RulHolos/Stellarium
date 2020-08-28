@@ -1,0 +1,22 @@
+{
+  "v0.0.2": {
+    "en": {
+      "+": ";danbooru\nGuild systems with guild shops\nModeration.\nChangelog command.\nBot avaiable to be used by anyone.\nBadges.\nBugs patched.",
+      "-": "///"
+    },
+    "fr": {
+      "+": ";danbooru\nSyst\u00E8me de guild avec achats.\nMod\u00E9ration.\nCommande changelog.\nBot utilisable par tout le monde.\nBadges.\nBugs corrig\u00E9s.",
+      "-": "///"
+    }
+  },
+  "v0.0.1": {
+    "en": {
+      "+": "Adaptation of bases cmds from Akiri for Stellarium.\nAdded base systems and cogs modifications.",
+      "-": "///"
+    },
+    "fr": {
+      "+": "Adaptation des bases de Akiri pour Stellarium.\nAjout des syst\u00E8mes de base et modification des cogs.",
+      "-": "///"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+__pycache__/
+ALbot_env/
+logs/
+*.bat
+*.txt
