@@ -10,8 +10,8 @@
     "MaxSlots": 5,
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
-    "lvl": 3,
-    "xp": 185,
+    "lvl": 4,
+    "xp": 455,
     "private": false,
     "InviteLinks": {
       "7562a2ab-588e-48bc-bc44-7cf64b75552a--7909": "Exists"
@@ -46,8 +46,8 @@
     "MaxSlots": 1,
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
-    "lvl": 5,
-    "xp": 1155,
+    "lvl": 6,
+    "xp": 1425,
     "private": true,
     "InviteLinks": {},
     "Items": {},
@@ -56,5 +56,23 @@
       "At the top of the World": "At the top of the World"
     },
     "created_at": "25/08/2020 (d/m/y)"
+  },
+  "Oui": {
+    "name": "Oui",
+    "id": "ecb2a632-a419-4112-92c3-9bffe1bd0206",
+    "desc": "",
+    "members": {
+      "741125296761208942": 741125296761208942
+    },
+    "MaxSlots": 5,
+    "creator": 741125296761208942,
+    "creatorRoleColor": 15277667,
+    "lvl": 2,
+    "xp": 65,
+    "private": false,
+    "InviteLinks": {},
+    "Items": {},
+    "Badges": {},
+    "created_at": "28/08/2020 (d/m/y)"
   }
 }

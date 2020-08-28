@@ -178,7 +178,7 @@ class guildes(commands.Cog):
             if not found: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
-    @commands.command()
+    @commands.command(aliases=["guildshop"])
     async def GuildShop(self, ctx, *, name=""):
         if name:
             guildjson = json.load(open("json/guilds.json", 'r'))
