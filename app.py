@@ -9,9 +9,7 @@ from itertools import cycle
 from discord import *
 from discord.ext.commands import has_permissions
 
-from cogs.config import get_lang, get_prefix
-
-default_prefix = ";"
+from cogs.config import get_lang, get_prefix, get_default_prefix
 
 client = commands.Bot(command_prefix=get_prefix)
 client.remove_command('help')
@@ -60,7 +58,7 @@ async def on_guild_join(guild):
     conf[Iguild] = {}
     conf[Iguild]["lang"] = "en"
     conf[Iguild]["creator"] = guild.owner.id
-    conf[Iguild]["prefix"] = ";"
+    conf[Iguild]["prefix"] = get_default_prefix()
 
     with open('json/serverconfig.json', 'w') as sConfSave:
         json.dump(conf, sConfSave, indent=2)
