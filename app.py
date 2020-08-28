@@ -1,6 +1,6 @@
-# Stellarium v.3.1.0
+# Stellarium
 # Fait pour tourner en version 1.4.1 du module discord.
-versionBot = "v0.0.2"
+versionBot = "v0.0.3"
 
 import discord, asyncio, logging, datetime, json, random, time, os, requests, aiohttp
 from discord.ext import commands, tasks
@@ -9,15 +9,9 @@ from itertools import cycle
 from discord import *
 from discord.ext.commands import has_permissions
 
-default_prefix = ";"
+from cogs.config import get_lang, get_prefix
 
-async def get_prefix(client, message):
-    with open("json/serverconfig.json", 'r') as sConf1: conf1 = json.load(sConf1)
-    guild = message.guild
-    if guild:
-        return conf1[str(guild.id)]["prefix"]
-    else:
-        return default_prefix
+default_prefix = ";"
 
 client = commands.Bot(command_prefix=get_prefix)
 client.remove_command('help')
@@ -32,18 +26,12 @@ logger.addHandler(handler)
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
 cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru"]
-with open("json/lang.json", 'r') as langF: lang = json.load(langF)
-with open("json/serverconfig.json", 'r') as sConf: conf = json.load(sConf)
 
 # # # Defs et classes # # #
 
 #@tasks.loop(seconds=20)
 #async def change_status():
 #    await client.change_presence(activity=discord.Game(next(status)))
-
-def get_lang(context, field):
-    """ contexte doit toujours être la valeur id de la guild """
-    return lang[conf[context]["lang"]][field]
 
 # # # Events # # #
 
@@ -67,6 +55,7 @@ async def on_ready():
 
 @client.event
 async def on_guild_join(guild):
+    conf = json.load(open("json/serverconfig.json", 'r'))
     Iguild = str(guild.id)
     conf[Iguild] = {}
     conf[Iguild]["lang"] = "en"
@@ -78,6 +67,7 @@ async def on_guild_join(guild):
 
 @client.event
 async def on_guild_remove(guild):
+    conf = json.load(open("json/serverconfig.json", 'r'))
     conf.pop(str(guild.id))
 
     with open('json/serverconfig.json', 'w') as sConfSave:

@@ -2,16 +2,12 @@ import discord, json, random, uuid
 from datetime import date
 from discord.ext import commands
 
+from cogs.config import get_lang
+
 class guildes(commands.Cog):
     def __init__(self, client):
         self.client = client
-        self.lang = json.load(open("json/lang.json", 'r'))
-        self.conf = json.load(open("json/serverconfig.json", 'r'))
 
-
-    def get_lang(self, context, field):
-        """ contexte doit toujours être la valeur id de la guild """
-        return self.lang[self.conf[str(context)]["lang"]][field]
 
     @commands.command(aliases=["GuildInfo"])
     async def guildInfo(self, ctx, *, name=""):
@@ -21,7 +17,7 @@ class guildes(commands.Cog):
                 creator = ctx.guild.get_member(guildjson[name]["creator"])
                 embed = discord.Embed(colour=guildjson[name]["creatorRoleColor"])
                 embed.set_author(name=f'{guildjson[name]["name"]}, LVL : {guildjson[name]["lvl"]}, EXP : {guildjson[name]["xp"]}')
-                embed.set_footer(text="Stellarium Guild Module, v0.0.2 Alpha")
+                embed.set_footer(text="Stellarium Guild Module, v0.0.3 Alpha")
                 embed.set_thumbnail(url=self.client.get_user(guildjson[name]["creator"]).avatar_url)
 
                 embed.add_field(name="id", value=guildjson[name]["id"], inline=False)
@@ -29,14 +25,14 @@ class guildes(commands.Cog):
                 embed.add_field(name="Creator", value=self.client.get_user(guildjson[name]["creator"]).name, inline=True)
                 embed.add_field(name="Private", value="Y" if guildjson[name]["private"] else "N", inline=True)
                 embed.add_field(name="Slots", value=guildjson[name]["MaxSlots"], inline=True)
-                embed.add_field(name=self.get_lang(ctx.guild.id, "UserCreatedAt"), value=guildjson[name]["created_at"], inline=True)
+                embed.add_field(name=get_lang(ctx.guild.id, "UserCreatedAt"), value=guildjson[name]["created_at"], inline=True)
 
                 embed.add_field(name="Description", value=guildjson[name]["desc"] or "None", inline=False)
                 embed.add_field(name="Badges", value=' ; '.join([name for name in guildjson[name]["Badges"]]) or "None", inline=False)
 
                 await ctx.send(embed=embed)
-            else: await ctx.send(self.get_lang(ctx.guild.id, "incorrectGuildName"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+            else: await ctx.send(get_lang(ctx.guild.id, "incorrectGuildName"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command(aliases=["createGuild", "createguild"])
     async def CreateGuild(self, ctx, *, name=""):
@@ -61,9 +57,9 @@ class guildes(commands.Cog):
                 guildjson[name]["created_at"] = f"{date.today().strftime('%d/%m/%Y')} (d/m/y)"
                 with open("json/guilds.json", "w") as f:
                     json.dump(guildjson, f, indent=2)
-                await ctx.send(f'{self.get_lang(ctx.guild.id, "GuildCreated")} : {name}')
-            else: await ctx.send(self.get_lang(ctx.guild.id, "GuildAlreadyExists"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+                await ctx.send(f'{get_lang(ctx.guild.id, "GuildCreated")} : {name}')
+            else: await ctx.send(get_lang(ctx.guild.id, "GuildAlreadyExists"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command(aliases=["editguilddesc", "editGuildDesc"])
     async def EditGuildDesc(self, ctx, id, desc=""):
@@ -75,10 +71,10 @@ class guildes(commands.Cog):
                         guildjson[guilds]["desc"] = desc
                         with open("json/guilds.json", "w") as f:
                             json.dump(guildjson, f, indent=2)
-                        await ctx.send(self.get_lang(ctx.guild.id, "GuildDescModified"))
-                    else: await ctx.send(self.get_lang(ctx.guild.id, "CheckFailure"))
-                else: await ctx.send(self.get_lang(ctx.guild.id, "GuildDontExists"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+                        await ctx.send(get_lang(ctx.guild.id, "GuildDescModified"))
+                    else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
+                else: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command(aliases=["joinguild", "joinGuild", "Joinguild"])
     async def JoinGuild(self, ctx, name=""):
@@ -95,10 +91,10 @@ class guildes(commands.Cog):
                                 guildjson[guilds]["members"][ctx.message.author.id] = ctx.message.author.id
                                 with open("json/guilds.json", "w") as f:
                                     json.dump(guildjson, f, indent=2)
-                                await ctx.send(self.get_lang(ctx.guild.id, "GuildJoined"))
-                            else: await ctx.send(self.get_lang(ctx.guild.id, "GuildFull"))
-                        else: await ctx.send(self.get_lang(ctx.guild.id, "AlreadyInGuild"))
-                    else: await ctx.send(self.get_lang(ctx.guild.id, "PrivateGuild"))
+                                await ctx.send(get_lang(ctx.guild.id, "GuildJoined"))
+                            else: await ctx.send(get_lang(ctx.guild.id, "GuildFull"))
+                        else: await ctx.send(get_lang(ctx.guild.id, "AlreadyInGuild"))
+                    else: await ctx.send(get_lang(ctx.guild.id, "PrivateGuild"))
 
                 elif name in guildjson[guilds]["InviteLinks"]:
                     found = True
@@ -106,10 +102,10 @@ class guildes(commands.Cog):
                     guildjson[guilds]["InviteLinks"].pop(name)
                     with open("json/guilds.json", "w") as f:
                         json.dump(guildjson, f, indent=2)
-                    await ctx.send(self.get_lang(ctx.guild.id, "GuildJoined"))
+                    await ctx.send(get_lang(ctx.guild.id, "GuildJoined"))
 
-            if not found: await ctx.send(self.get_lang(ctx.guild.id, "GuildDontExists"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+            if not found: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
     async def LeaveGuild(self, ctx, name=""):
@@ -125,10 +121,10 @@ class guildes(commands.Cog):
                             guildjson.pop(guilds)
                         with open("json/guilds.json", "w") as f:
                             json.dump(guildjson, f, indent=2)
-                        await ctx.send(self.get_lang(ctx.guild.id, "GuildLeaved"))
-                    else: await ctx.send(self.get_lang(ctx.guild.id, "CantLeaveGuildIfNotIn"))
-            if not found: await ctx.send(self.get_lang(ctx.guild.id, "GuildDontExists"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+                        await ctx.send(get_lang(ctx.guild.id, "GuildLeaved"))
+                    else: await ctx.send(get_lang(ctx.guild.id, "CantLeaveGuildIfNotIn"))
+            if not found: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
     async def GuildLink(self, ctx, id=""):
@@ -142,11 +138,11 @@ class guildes(commands.Cog):
                             guildjson[guilds]["InviteLinks"][link] = "Exists"
                             with open("json/guilds.json", "w") as f:
                                 json.dump(guildjson, f, indent=2)
-                            await ctx.send(self.get_lang(ctx.guild.id, "SendedInDMs"))
+                            await ctx.send(get_lang(ctx.guild.id, "SendedInDMs"))
                             await ctx.author.send(link)
-                        else: await ctx.send(self.get_lang(ctx.guild.id, "CantLinkUnPrivateGuilds"))
-                    else: await ctx.send(self.get_lang(ctx.guild.id, "CheckFailure"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+                        else: await ctx.send(get_lang(ctx.guild.id, "CantLinkUnPrivateGuilds"))
+                    else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
     async def DeleteGuild(self, ctx, id=""):
@@ -160,10 +156,10 @@ class guildes(commands.Cog):
                         guildjson.pop(guilds)
                         with open("json/guilds.json", "w") as f:
                             json.dump(guildjson, f, indent=2)
-                        await ctx.send(self.get_lang(ctx.guild.id, "GuildDeleted"))
-                    else: await ctx.send(self.get_lang(ctx.guild.id, "CheckFailure"))
-            if not found: await ctx.send(self.get_lang(ctx.guild.id, "GuildDontExists"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+                        await ctx.send(get_lang(ctx.guild.id, "GuildDeleted"))
+                    else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
+            if not found: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
     async def TogglePrivate(self, ctx, id=""):
@@ -177,12 +173,12 @@ class guildes(commands.Cog):
                         guildjson[guilds]["private"] = not guildjson[guilds]["private"]
                         with open("json/guilds.json", "w") as f:
                             json.dump(guildjson, f, indent=2)
-                        await ctx.send(f'{self.get_lang(ctx.guild.id, "PrivateToggled")} {"Y" if guildjson[guilds]["private"] else "N"}!')
-                    else: await ctx.send(self.get_lang(ctx.guild.id, "CheckFailure"))
-            if not found: await ctx.send(self.get_lang(ctx.guild.id, "GuildDontExists"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "argumentNeeded"))
+                        await ctx.send(f'{get_lang(ctx.guild.id, "PrivateToggled")} {"Y" if guildjson[guilds]["private"] else "N"}!')
+                    else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
+            if not found: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
-    @commands.command()
+    @commands.command(aliases=["guildshop"])
     async def GuildShop(self, ctx, *, name=""):
         if name:
             guildjson = json.load(open("json/guilds.json", 'r'))
@@ -197,7 +193,7 @@ class guildes(commands.Cog):
                     GuildName = guilds
 
             if not found:
-                await ctx.send(self.get_lang(ctx.guild.id, "GuildDontExists"))
+                await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
             else:
                 embed = discord.Embed(colour=ctx.message.author.top_role.colour.value)
                 embed.set_author(name="Guild Shop")
@@ -227,10 +223,10 @@ class guildes(commands.Cog):
                                     guildjson1[GuildName]["MaxSlots"] += 5
                                     with open("json/guilds.json", "w") as f:
                                         json.dump(guildjson1, f, indent=2)
-                                    await ctx.send(self.get_lang(ctx.guild.id, "GuildShop_01"))
-                                else: await ctx.send(self.get_lang(ctx.guild.id, "TooLowLevel"))
-                            else: await ctx.send(self.get_lang(ctx.guild.id, "CheckFailure"))
-        else: await ctx.send(self.get_lang(ctx.guild.id, "ProvideGuildName"))
+                                    await ctx.send(get_lang(ctx.guild.id, "GuildShop_01"))
+                                else: await ctx.send(get_lang(ctx.guild.id, "TooLowLevel"))
+                            else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
+        else: await ctx.send(get_lang(ctx.guild.id, "ProvideGuildName"))
 
     @commands.command(aliases=["Leaderboard"])
     async def leaderboard(self, ctx):
@@ -243,24 +239,24 @@ class guildes(commands.Cog):
             except:
                 leaderboardList[guilds] = "None"
 
-        msg = f"""```Leaderboard {self.get_lang(ctx.guild.id, "for")} 5 guilds.
+        msg = f"""```Leaderboard {get_lang(ctx.guild.id, "for")} 5 guilds.
 
 ------------------------------
 
-1. {guildjson[leaderboardList[0]]["name"]}. {len(guildjson[leaderboardList[0]]["members"])} {self.get_lang(ctx.guild.id, "Members")}.
+1. {guildjson[leaderboardList[0]]["name"]}. {len(guildjson[leaderboardList[0]]["members"])} {get_lang(ctx.guild.id, "Members")}.
 LVL = {guildjson[leaderboardList[0]]["lvl"]}. EXP = {guildjson[leaderboardList[0]]["xp"]}.
 
 ------------------------------
-2. {guildjson[leaderboardList[1]]["name"]}. {len(guildjson[leaderboardList[1]]["members"])} {self.get_lang(ctx.guild.id, "Members")}.
+2. {guildjson[leaderboardList[1]]["name"]}. {len(guildjson[leaderboardList[1]]["members"])} {get_lang(ctx.guild.id, "Members")}.
 LVL = {guildjson[leaderboardList[1]]["lvl"]}. EXP = {guildjson[leaderboardList[1]]["xp"]}.
 ------------------------------
-3. {guildjson[leaderboardList[2]]["name"]}. {len(guildjson[leaderboardList[2]]["members"])} {self.get_lang(ctx.guild.id, "Members")}.
+3. {guildjson[leaderboardList[2]]["name"]}. {len(guildjson[leaderboardList[2]]["members"])} {get_lang(ctx.guild.id, "Members")}.
 LVL = {guildjson[leaderboardList[2]]["lvl"]}. EXP = {guildjson[leaderboardList[2]]["xp"]}.
 ------------------------------
-4. {guildjson[leaderboardList[3]]["name"]}. {len(guildjson[leaderboardList[3]]["members"])} {self.get_lang(ctx.guild.id, "Members")}.
+4. {guildjson[leaderboardList[3]]["name"]}. {len(guildjson[leaderboardList[3]]["members"])} {get_lang(ctx.guild.id, "Members")}.
 LVL = {guildjson[leaderboardList[3]]["lvl"]}. EXP = {guildjson[leaderboardList[3]]["xp"]}.
 ------------------------------
-5. {guildjson[leaderboardList[4]]["name"]}. {len(guildjson[leaderboardList[4]]["members"])} {self.get_lang(ctx.guild.id, "Members")}.
+5. {guildjson[leaderboardList[4]]["name"]}. {len(guildjson[leaderboardList[4]]["members"])} {get_lang(ctx.guild.id, "Members")}.
 LVL = {guildjson[leaderboardList[4]]["lvl"]}. EXP = {guildjson[leaderboardList[4]]["xp"]}.
 ------------------------------
 ```"""

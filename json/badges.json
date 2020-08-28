@@ -10,5 +10,17 @@
     "id": 1,
     "en": "Get the first place in the leaderboard at least one time.",
     "fr": "Atteignez la premi\u00E8re place du leaderboard au moins une fois."
+  },
+  "Loads of members": {
+    "name": "Loads of members",
+    "id": 2,
+    "en": "Get 20 members at least one time in the guild.",
+    "fr": "Atteingnez les 20 membres au moins une fois."
+  },
+  "Loads of members 2": {
+    "name": "Loads of members 2",
+    "id": 3,
+    "en": "Get 50 members at least one time in the guild.",
+    "fr": "Atteingnez les 50 membres au moins une fois."
   }
 }
