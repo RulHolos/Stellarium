@@ -21,7 +21,7 @@ class roll(commands.Cog):
             listeFinale = ' - '.join(str(jet) for jet in listJet)
             await ctx.send(f'```{listeFinale}```')
         except Exception as error:
-            await ctx.send("`Une erreur est survenue, merci de vérifier vos valeurs (mettre 1d10 à la place de d10 par exemple)`")
+            await ctx.send(get_lang("roll"))
 
 
 

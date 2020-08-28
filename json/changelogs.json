@@ -1,4 +1,14 @@
 {
+  "v0.0.3": {
+    "en": {
+      "+": "Github repo.\nInternal code optimization.\nAdded permissions checks to setLang and setPrefix.",
+      "-": "///"
+    },
+    "fr": {
+      "+": "Github repo.\nOptimisation interne du code.\nAjout de v\u00E9rifications de perms pour setLang et setPrefix.",
+      "-": "///"
+    }
+  },
   "v0.0.2": {
     "en": {
       "+": ";danbooru\nGuild systems with guild shops\nModeration.\nChangelog command.\nBot avaiable to be used by anyone.\nBadges.\nBugs patched.",
