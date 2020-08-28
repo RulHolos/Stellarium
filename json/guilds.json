@@ -1,0 +1,78 @@
+{
+  "Devanagara": {
+    "name": "Devanagara",
+    "id": "7562a2ab-588e-48bc-bc44-7cf64b75552a",
+    "desc": "Ceci est la guilde du serveur Len'en 'Devanagara' dont le lien est le suivant : https://discord.gg/XN5nZYN",
+    "members": {
+      "130313080545607680": 130313080545607680,
+      "317018826825007114": 317018826825007114
+    },
+    "MaxSlots": 5,
+    "creator": 130313080545607680,
+    "creatorRoleColor": 7751053,
+    "lvl": 3,
+    "xp": 200,
+    "private": false,
+    "InviteLinks": {
+      "7562a2ab-588e-48bc-bc44-7cf64b75552a--7909": "Exists"
+    },
+    "Items": {},
+    "Badges": {},
+    "created_at": "25/08/2020 (d/m/y)"
+  },
+  "None": {
+    "name": "None",
+    "id": "0",
+    "desc": "Placeholder guild for Stellarium's guild system.",
+    "members": {},
+    "MaxSlots": 0,
+    "creator": 130313080545607680,
+    "creatorRoleColor": 2067276,
+    "lvl": 0,
+    "xp": 0,
+    "private": true,
+    "InviteLinks": {},
+    "Items": {},
+    "Badges": {},
+    "created_at": "00/00/0000 (d/m/y)"
+  },
+  "Ruby For Aneha": {
+    "name": "Ruby For Aneha",
+    "id": "e140226d-4803-4b62-aba6-9c6599fee54c",
+    "desc": "Stellarium devs",
+    "members": {
+      "130313080545607680": 130313080545607680
+    },
+    "MaxSlots": 1,
+    "creator": 130313080545607680,
+    "creatorRoleColor": 7751053,
+    "lvl": 5,
+    "xp": 1170,
+    "private": true,
+    "InviteLinks": {},
+    "Items": {},
+    "Badges": {
+      "**The Creators**": "**The Creators**",
+      "At the top of the World": "At the top of the World"
+    },
+    "created_at": "25/08/2020 (d/m/y)"
+  },
+  "Oui": {
+    "name": "Oui",
+    "id": "a5849ccb-5510-44d2-aaf3-85f11fe21411",
+    "desc": "",
+    "members": {
+      "130313080545607680": 130313080545607680
+    },
+    "MaxSlots": 5,
+    "creator": 130313080545607680,
+    "creatorRoleColor": 10945175,
+    "lvl": 1,
+    "xp": 10,
+    "private": false,
+    "InviteLinks": {},
+    "Items": {},
+    "Badges": {},
+    "created_at": "28/08/2020 (d/m/y)"
+  }
+}
