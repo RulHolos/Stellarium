@@ -11,7 +11,7 @@ class SCP(commands.Cog):
     async def SCP(self, ctx, scp=""):
         if scp:
             scpIn = scp.upper()
-            scpOut = re.findall("[1234567890]", scpIn)
+            scpOut = re.findall("[0-9]", scpIn)
             if scpOut:
                 await ctx.send(f"http://www.scpwiki.com/scp-{''.join(scpOut)}")
             else: await ctx.send(get_lang(str(ctx.guild.id), "BadArgument"))

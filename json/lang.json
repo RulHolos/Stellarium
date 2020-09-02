@@ -56,7 +56,7 @@
     "ProvideGuildName": "Veuillez entrer le nom de la guild pour laquelle vous faites ces achats.",
     "TooLowLevel": "La guilde est trop bas niveau pour pouvoir acheter des am\u00E9liorations.",
     "GuildShop_01": "Vous venez d'acheter 5 slots de guild. Le niveau de la guild a baiss\u00E9 de 4.",
-    "roll": "`Une erreur est survenue, merci de v\u00E9rifier vos valeurs (mettre 1d10 au lieu de d10 par exemple)`"
+    "roll": "Une erreur est survenue, merci de v\u00E9rifier vos valeurs (mettre 1d10 au lieu de d10 par exemple)"
   },
 
   "en" : {
@@ -116,6 +116,6 @@
     "ProvideGuildName": "Please provide the name of the guild you're buying things for.",
     "TooLowLevel": "The guild's level is too low to buy anything.",
     "GuildShop_01": "You just buyed 5 slots for your guild. The guild lost 4 levels.",
-    "roll": "`An error as occured. Please verify arguments.`"
+    "roll": "An error as occured. Please verify arguments."
   }
 }
