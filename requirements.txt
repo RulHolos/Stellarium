@@ -6,3 +6,4 @@ uuid
 time
 secrets
 pybooru
+argparse==1.4.0

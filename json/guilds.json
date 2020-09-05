@@ -11,7 +11,7 @@
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
     "lvl": 5,
-    "xp": 760,
+    "xp": 820,
     "private": false,
     "InviteLinks": {
       "7562a2ab-588e-48bc-bc44-7cf64b75552a--7909": "Exists"
@@ -39,7 +39,7 @@
   "Ruby For Aneha": {
     "name": "Ruby For Aneha",
     "id": "e140226d-4803-4b62-aba6-9c6599fee54c",
-    "desc": "Stellarium devs",
+    "desc": "Stellarium Devs",
     "members": {
       "130313080545607680": 130313080545607680
     },
@@ -47,7 +47,7 @@
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
     "lvl": 6,
-    "xp": 1715,
+    "xp": 1775,
     "private": true,
     "InviteLinks": {},
     "Items": {},

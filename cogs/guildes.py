@@ -1,4 +1,4 @@
-import discord, json, random, uuid, asyncio
+import discord, json, random, uuid, asyncio, argparse
 from datetime import date
 from discord.ext import commands
 
@@ -34,46 +34,66 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command(aliases=["createGuild", "createguild"])
-    async def CreateGuild(self, ctx, *, name=""):
-        if name:
-            guildjson = json.load(open("json/guilds.json", 'r'))
-            if not name in guildjson:
-                guildjson[name] = {}
-                guildjson[name]["name"] = name
-                guildjson[name]["id"] = str(uuid.uuid4())
-                guildjson[name]["desc"] = ""
-                guildjson[name]["members"] = {}
-                guildjson[name]["MaxSlots"] = 5
-                guildjson[name]["creator"] = ctx.message.author.id
-                guildjson[name]["creatorRoleColor"] = ctx.message.author.top_role.colour.value
-                guildjson[name]["members"][ctx.message.author.id] = ctx.message.author.id
-                guildjson[name]["lvl"] = 1
-                guildjson[name]["xp"] = 0
-                guildjson[name]["private"] = False
-                guildjson[name]["InviteLinks"] = {}
-                guildjson[name]["Items"] = {}
-                guildjson[name]["Badges"] = {}
-                guildjson[name]["created_at"] = f"{date.today().strftime('%d/%m/%Y')} (d/m/y)"
-                with open("json/guilds.json", "w") as f:
-                    json.dump(guildjson, f, indent=2)
-                await ctx.send(f'{get_lang(ctx.guild.id, "GuildCreated")} : {name}')
-            else: await ctx.send(get_lang(ctx.guild.id, "GuildAlreadyExists"))
-        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
+    async def CreateGuild(self, ctx, *args):
+        try:
+            parser = argparse.ArgumentParser()
+            parser.add_argument('name', type=str)
+            parser.add_argument('-d', '--desc', type=str)
+            parser.add_argument('-p', '--private', action='store_true')
+            parse = parser.parse_args(args)
+            name = parse.name
+            if name:
+                guildjson = json.load(open("json/guilds.json", 'r'))
+                if not name in guildjson:
+                    guildjson[name] = {}
+                    guildjson[name]["name"] = name
+                    guildjson[name]["id"] = str(uuid.uuid4())
+                    guildjson[name]["desc"] = parse.desc or ""
+                    guildjson[name]["members"] = {}
+                    guildjson[name]["MaxSlots"] = 5
+                    guildjson[name]["creator"] = ctx.message.author.id
+                    guildjson[name]["creatorRoleColor"] = ctx.message.author.top_role.colour.value
+                    guildjson[name]["members"][ctx.message.author.id] = ctx.message.author.id
+                    guildjson[name]["lvl"] = 1
+                    guildjson[name]["xp"] = 0
+                    guildjson[name]["private"] = True if parse.private else False
+                    guildjson[name]["InviteLinks"] = {}
+                    guildjson[name]["Items"] = {}
+                    guildjson[name]["Badges"] = {}
+                    guildjson[name]["created_at"] = f"{date.today().strftime('%d/%m/%Y')} (d/m/y)"
+                    with open("json/guilds.json", "w") as f:
+                        json.dump(guildjson, f, indent=2)
+                    await ctx.send(f'{get_lang(ctx.guild.id, "GuildCreated")} : {name}')
+                else: await ctx.send(get_lang(ctx.guild.id, "GuildAlreadyExists"))
+            else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
+        except: raise commands.BadArgument
+
 
     @commands.command(aliases=["editguilddesc", "editGuildDesc"])
-    async def EditGuildDesc(self, ctx, id, desc=""):
-        guildjson = json.load(open("json/guilds.json", 'r'))
-        if (id and desc):
-            for guilds in guildjson:
-                if id in guildjson[guilds]["id"]:
-                    if ctx.message.author.id == guildjson[guilds]["creator"]:
-                        guildjson[guilds]["desc"] = desc
-                        with open("json/guilds.json", "w") as f:
-                            json.dump(guildjson, f, indent=2)
-                        await ctx.send(get_lang(ctx.guild.id, "GuildDescModified"))
-                    else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
-                else: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
-        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
+    async def EditGuildDesc(self, ctx, *args):
+        try:
+            parser = argparse.ArgumentParser()
+            parser.add_argument('name', type=str)
+            parser.add_argument('desc', type=str)
+            parse = parser.parse_args(args)
+            name = parse.name
+            desc = parse.desc
+
+            guildjson = json.load(open("json/guilds.json", 'r'))
+            if (name and desc):
+                found = False
+                for guilds in guildjson:
+                    if name in guildjson[guilds]["name"]:
+                        found = True
+                        if ctx.message.author.id == guildjson[guilds]["creator"]:
+                            guildjson[guilds]["desc"] = desc
+                            with open("json/guilds.json", "w") as f:
+                                json.dump(guildjson, f, indent=2)
+                            await ctx.send(get_lang(ctx.guild.id, "GuildDescModified"))
+                        else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
+                if not found: await ctx.send(get_lang(ctx.guild.id, "GuildDontExists"))
+            else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
+        except: raise commands.BadArgument
 
     @commands.command(aliases=["joinguild", "joinGuild", "Joinguild"])
     async def JoinGuild(self, ctx, name=""):
