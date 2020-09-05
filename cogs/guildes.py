@@ -1,4 +1,4 @@
-import discord, json, random, uuid
+import discord, json, random, uuid, asyncio
 from datetime import date
 from discord.ext import commands
 
@@ -14,7 +14,6 @@ class guildes(commands.Cog):
         if name:
             guildjson = json.load(open("json/guilds.json", 'r'))
             if name in guildjson:
-                creator = ctx.guild.get_member(guildjson[name]["creator"])
                 embed = discord.Embed(colour=guildjson[name]["creatorRoleColor"])
                 embed.set_author(name=f'{guildjson[name]["name"]}, LVL : {guildjson[name]["lvl"]}, EXP : {guildjson[name]["xp"]}')
                 embed.set_footer(text="Stellarium Guild Module, v0.0.3 Alpha")
@@ -109,6 +108,7 @@ class guildes(commands.Cog):
 
     @commands.command()
     async def LeaveGuild(self, ctx, name=""):
+        """ Quitter une guilde dont fait parti une personne. """
         guildjson = json.load(open("json/guilds.json", 'r'))
         if name:
             found = False

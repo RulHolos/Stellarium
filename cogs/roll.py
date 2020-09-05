@@ -10,7 +10,7 @@ class roll(commands.Cog):
     @commands.command(aliases=["roll", 'R', 'Roll', 'ROLL'])
     async def r(self, ctx, jet=""):
         if jet:
-            if jet.upper() == "MOL":
+            if (jet.upper() == "MOL" or jet.upper() == "AVOGADRO"):
                 await ctx.send(f'```{random.randint(1, 60221407600000000000000)}```')
             else:
                 try:
@@ -18,7 +18,7 @@ class roll(commands.Cog):
                     vAvant = jet[:jet.find('D')]
                     vApres = jet[jet.find('D'):].strip('D')
                     await ctx.send(f'```{" ; ".join(str(jet) for jet in [random.randint(1, int(vApres)) for jets in range(0, int(vAvant or 1))]) or "Wtf ?"}```')
-                except Exception as e:
+                except:
                     raise commands.BadArgument
         else: await ctx.send(get_lang(ctx.guild.id, "roll"))
 

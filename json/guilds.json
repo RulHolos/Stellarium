@@ -10,8 +10,8 @@
     "MaxSlots": 5,
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
-    "lvl": 4,
-    "xp": 605,
+    "lvl": 5,
+    "xp": 760,
     "private": false,
     "InviteLinks": {
       "7562a2ab-588e-48bc-bc44-7cf64b75552a--7909": "Exists"
@@ -47,7 +47,7 @@
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
     "lvl": 6,
-    "xp": 1575,
+    "xp": 1715,
     "private": true,
     "InviteLinks": {},
     "Items": {},
@@ -74,5 +74,59 @@
     "Items": {},
     "Badges": {},
     "created_at": "28/08/2020 (d/m/y)"
+  },
+  "Amr's Guild": {
+    "name": "Amr's Guild",
+    "id": "930d74c7-d468-4fb7-b6b5-fa5ba1e76fdd",
+    "desc": "",
+    "members": {
+      "571813392558325771": 571813392558325771
+    },
+    "MaxSlots": 5,
+    "creator": 571813392558325771,
+    "creatorRoleColor": 1819961,
+    "lvl": 4,
+    "xp": 615,
+    "private": false,
+    "InviteLinks": {},
+    "Items": {},
+    "Badges": {},
+    "created_at": "03/09/2020 (d/m/y)"
+  },
+  "supreme kings supporters": {
+    "name": "supreme kings supporters",
+    "id": "ff511972-9029-4ff8-aabc-a2ffe732df27",
+    "desc": "",
+    "members": {
+      "363789153441153025": 363789153441153025
+    },
+    "MaxSlots": 5,
+    "creator": 363789153441153025,
+    "creatorRoleColor": 15953141,
+    "lvl": 5,
+    "xp": 700,
+    "private": false,
+    "InviteLinks": {},
+    "Items": {},
+    "Badges": {},
+    "created_at": "03/09/2020 (d/m/y)"
+  },
+  "Sush army >:3": {
+    "name": "Sush army >:3",
+    "id": "be2e9acc-5734-4fb5-8a5b-b0ff801ae7c3",
+    "desc": "",
+    "members": {
+      "545703698236440589": 545703698236440589
+    },
+    "MaxSlots": 5,
+    "creator": 545703698236440589,
+    "creatorRoleColor": 15277667,
+    "lvl": 3,
+    "xp": 220,
+    "private": false,
+    "InviteLinks": {},
+    "Items": {},
+    "Badges": {},
+    "created_at": "03/09/2020 (d/m/y)"
   }
 }
