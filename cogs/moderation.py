@@ -1,4 +1,4 @@
-import discord, json
+import discord, json, argparse, re
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 from discord.utils import get

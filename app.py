@@ -23,7 +23,7 @@ logger.addHandler(handler)
 
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
-cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP"]
+cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo"]
 
 # # # Defs et classes # # #
 
@@ -119,6 +119,7 @@ async def help(ctx):
     embed.add_field(name=f"{p}leaderboard", value=get_lang(guild, "help_13"), inline=True)
     embed.add_field(name=f"{p}GuildShop <name>", value=get_lang(guild, "help_14"), inline=True)
     embed.add_field(name=f"{p}SCP <[1234567890]>", value=get_lang(guild, "help_15"), inline=True)
+    embed.add_field(name=f"{p}weather city", value=get_lang(guild, "help_16"), inline=True)
 
     await ctx.send(embed=embed)
 

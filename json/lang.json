@@ -15,6 +15,7 @@
     "help_13": "Voir les 5 plus grandes guildes.",
     "help_14": "Voir le magasin de guildes.",
     "help_15": "Voir la fiche d'un SCP donn\u00E9. (Site anglais officiel)",
+    "help_16": "Obtenir les informations m\u00E9t\u00E9orologiques d'une ville donn\u00E9e.",
     "SetPrefixSuccess": "Pr\u00E9fix du serveur chang\u00E9 avec succ\u00E8s avec",
     "InvalidLanguage": "Langue choisie invalide. Langues disponibles : 'en' et 'fr'.",
     "SetLangSuccess": "La langue a bien \u00E9t\u00E9 modifi\u00E9e en",
@@ -56,7 +57,12 @@
     "ProvideGuildName": "Veuillez entrer le nom de la guild pour laquelle vous faites ces achats.",
     "TooLowLevel": "La guilde est trop bas niveau pour pouvoir acheter des am\u00E9liorations.",
     "GuildShop_01": "Vous venez d'acheter 5 slots de guild. Le niveau de la guild a baiss\u00E9 de 4.",
-    "roll": "Une erreur est survenue, merci de v\u00E9rifier vos valeurs (mettre 1d10 au lieu de d10 par exemple)"
+    "GuildShop_02": "Tu viens d'acheter un badge inutile. GG, j'imagine.",
+    "roll": "Une erreur est survenue, merci de v\u00E9rifier vos valeurs (mettre 1d10 au lieu de d10 par exemple)",
+    "wind": "Vent",
+    "pressure": "Pressure",
+    "temperature": "Temp\u00E9rature",
+    "general": "G\u00E9n\u00E9rale"
   },
 
   "en" : {
@@ -75,6 +81,7 @@
     "help_13": "See the 5 biggest guilds.",
     "help_14": "See the guild's shop.",
     "help_15": "See the official SCP page for the given SCP.",
+    "help_16": "Get the weather info of a given city.",
     "SetPrefixSuccess": "Server's prefix successfuly changed",
     "InvalidLanguage": "Invalid language. Languages avaiable : 'en' and 'fr'.",
     "SetLangSuccess": "The language as been modified to",
@@ -116,6 +123,11 @@
     "ProvideGuildName": "Please provide the name of the guild you're buying things for.",
     "TooLowLevel": "The guild's level is too low to buy anything.",
     "GuildShop_01": "You just buyed 5 slots for your guild. The guild lost 4 levels.",
-    "roll": "An error as occured. Please verify arguments."
+    "GuildShop_02": "You just payed for a useless badge. GG, I guess",
+    "roll": "An error as occured. Please verify arguments.",
+    "wind": "Wind",
+    "pressure": "Pressure",
+    "temperature": "Temperature",
+    "general": "general"
   }
 }

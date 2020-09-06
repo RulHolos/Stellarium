@@ -203,7 +203,7 @@ class guildes(commands.Cog):
         if name:
             guildjson = json.load(open("json/guilds.json", 'r'))
             def check(reaction, user):
-                return user == ctx.message.author and str(reaction.emoji) in [u"\U0001F5F3"]
+                return user == ctx.message.author and str(reaction.emoji) in [u"\U0001F5F3", u"\U0001F525"]
 
             found = False
             GuildName = None
@@ -221,12 +221,15 @@ class guildes(commands.Cog):
                 embed.set_footer(text="React to buy something!")
 
                 embed.add_field(name="Guild Slot :ballot_box:", value="4 guild LVLs for 5 slots.", inline=True)
+                embed.add_field(name="Fire badge :fire:", value="30 levels for a useless badge", inline=True)
 
                 msg = await ctx.send(embed=embed)
                 ballot = u"\U0001F5F3"
+                fire = u"\U0001F525"
                 await msg.add_reaction(ballot)
+                await msg.add_reaction(fire)
 
-                emojis = [ballot]
+                emojis = [ballot, fire]
                 while emojis:
                     try:
                         reaction, user = await self.client.wait_for('reaction_add', timeout=3600.0, check=check)
@@ -244,6 +247,18 @@ class guildes(commands.Cog):
                                     with open("json/guilds.json", "w") as f:
                                         json.dump(guildjson1, f, indent=2)
                                     await ctx.send(get_lang(ctx.guild.id, "GuildShop_01"))
+                                else: await ctx.send(get_lang(ctx.guild.id, "TooLowLevel"))
+                            else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
+                        if reaction.emoji == fire:
+                            guildjson1 = json.load(open("json/guilds.json", 'r'))
+                            await msg.remove_reaction(ballot, user)
+                            if ctx.message.author.id == guildjson1[GuildName]["creator"]:
+                                if guildjson1[GuildName]["lvl"] >= 30:
+                                    guildjson1[GuildName]["lvl"] -= 30
+                                    guildjson1[GuildName]["Badges"]["Wow, you paid 30 lvls for nothing"] = "Wow, you paid 30 lvls for nothing"
+                                    with open("json/guilds.json", "w") as f:
+                                        json.dump(guildjson1, f, indent=2)
+                                    await ctx.send(get_lang(ctx.guild.id, "GuildShop_02"))
                                 else: await ctx.send(get_lang(ctx.guild.id, "TooLowLevel"))
                             else: await ctx.send(get_lang(ctx.guild.id, "CheckFailure"))
         else: await ctx.send(get_lang(ctx.guild.id, "ProvideGuildName"))
