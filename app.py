@@ -2,28 +2,26 @@
 # Fait pour tourner en version 1.4.1 du module discord.
 versionBot = "v0.0.3"
 
-import discord, asyncio, logging, datetime, json, random, time, os, requests, aiohttp
+import discord, asyncio, datetime, json, random, time, os, requests, aiohttp
 from discord.ext import commands, tasks
 from discord.utils import get
 from itertools import cycle
 from discord import *
 from discord.ext.commands import has_permissions
+from termcolor import colored
 
-from cogs.config import get_lang, get_prefix, get_default_prefix
+from cogs.config import get_lang, get_prefix, get_default_prefix, debug
 
 client = commands.Bot(command_prefix=get_prefix)
 client.remove_command('help')
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename=(f'logs\{datetime.date.today()}.log'), encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
 
 # # # Variables # # #
 
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
 cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo"]
+os.system('color')
+os.system('cls')
 
 # # # Defs et classes # # #
 
@@ -31,22 +29,70 @@ cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "d
 #async def change_status():
 #    await client.change_presence(activity=discord.Game(next(status)))
 
+# # # console # # #
+
+@client.command()
+async def console(ctx):
+    if ctx.message.author.id != 130313080545607680:
+        raise commands.CheckFailure
+    else:
+        print(colored("Que voulez-vous faire ? (help pour la liste des commandes)", "yellow"))
+        cmd = input("> ")
+        if cmd.upper() == "HELP":
+            print(colored("say, help, listservs, exit", "yellow"))
+            await console(ctx)
+        elif cmd.upper() == "SAY":
+            print(colored("Quel serveur voulez-vous ?", "yellow"))
+            for servs in list(client.guilds):
+                print(f"{servs.name} -> {servs.id}")
+            serv = int(input("> "))
+            
+            print(colored("Quel channel voulez-vous ?", "yellow"))
+            get_serv = client.get_guild(serv)
+            for chans in get_serv.text_channels:
+                print(f"{chans.name} -> {chans.id}")
+            chan = int(input("> "))
+
+            get_chan = client.get_channel(chan)
+            await console_send_msg(get_chan, ctx)
+
+        elif cmd.upper() == "LISTSERVS":
+            for servs in list(client.guilds):
+                print(f"{servs.name} -> {servs.id}")
+        elif cmd.upper() == "EXIT":
+            os.system('cls')
+            on_ready_print()
+            
+async def console_send_msg(chan, ctx):
+    print(colored("Que voulez-vous envoyer ? (S = stop)", "yellow"))
+    msg = input("> ")
+    if msg.upper() == "S":
+        await console(ctx)
+    else:
+        await chan.send(msg)
+        await console_send_msg(chan, ctx)
+
+
 # # # Events # # #
+
+def on_ready_print():
+    print(colored('------', "red"))
+    print(colored('Bot lancé sous', "green"))
+    print(colored(client.user.name, "yellow"))
+    print(colored(client.user.id, "green"))
+    print(f'module discord en version {colored(discord.__version__, "green")}')
+    print('Version actuelle du bot : ' + colored(f"{versionBot}", "green"))
+    print(f'Dans {len(list(client.guilds))} serveurs.')
+    print(colored('------', "red"))
+    print(f'Commandes : {[cmd for cmd in cmds]}')
+    print(f'Command Prefix : {colored(";", "yellow")}')
+    print(colored('------', "red"))
+    print(' ')
 
 @client.event
 async def on_ready():
-    print('------')
-    print('Bot lancé sous')
-    print(client.user.name)
-    print(client.user.id)
-    print('module discord en version {}'.format(discord.__version__))
-    print('Version actuelle du bot : {}'.format(versionBot))
-    print(f'Dans {len(list(client.guilds))} serveurs.')
-    print('------')
-    print(f'Commandes : {[cmd for cmd in cmds]}')
-    print('Command Prefix : ;')
-    print('------')
-    print(' ')
+    os.system('cls')
+    on_ready_print()
 
     await client.change_presence(activity=discord.Game(f'{versionBot} | ;help'))
     #change_status.start()
@@ -95,7 +141,7 @@ async def on_command_error(ctx, error):
 
 # # # Commandes # # #
 
-@client.command(aliases=["aide"])
+@client.command(aliases=["aide", "Aide", "Help"])
 async def help(ctx):
     guild = str(ctx.guild.id)
     embed = discord.Embed(colour=ctx.author.top_role.colour.value)
@@ -129,7 +175,6 @@ async def changelog(ctx, version=""):
         version = versionBot
     changelogs = json.load(open("json/changelogs.json", 'r'))
     c = json.load(open("json/serverconfig.json", 'r'))
-    #lang[conf[context]["lang"]][field]
 
     embed = discord.Embed(colour=ctx.author.top_role.colour.value)
     embed.set_author(name=f"Changelog Stellarium {version}")

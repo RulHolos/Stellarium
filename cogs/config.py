@@ -1,5 +1,9 @@
 import os, json, asyncio, aiohttp
 
+debug_value = True
+
+def debug():
+    return debug_value
 
 def get_default_prefix():
     return ";"
