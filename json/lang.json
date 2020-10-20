@@ -62,7 +62,8 @@
     "wind": "Vent",
     "pressure": "Pressure",
     "temperature": "Temp\u00E9rature",
-    "general": "G\u00E9n\u00E9rale"
+    "general": "G\u00E9n\u00E9rale",
+    "Debug_Check": "Le bot n'est pas en mode debug. Vous ne pouvez pas faire cela."
   },
 
   "en" : {
@@ -128,6 +129,7 @@
     "wind": "Wind",
     "pressure": "Pressure",
     "temperature": "Temperature",
-    "general": "general"
+    "general": "general",
+    "Debug_Check": "The bot is not in debug mod. You cannot do that now."
   }
 }

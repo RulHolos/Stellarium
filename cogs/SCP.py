@@ -1,4 +1,4 @@
-import discord, json, secrets, random, re
+import discord, re
 from discord.ext import commands
 
 from cogs.config import get_lang

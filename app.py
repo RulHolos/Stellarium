@@ -1,6 +1,5 @@
 # Stellarium
 # Fait pour tourner en version 1.4.1 du module discord.
-versionBot = "v0.0.3"
 
 import discord, asyncio, datetime, json, random, time, os, requests, aiohttp
 from discord.ext import commands, tasks
@@ -10,7 +9,7 @@ from discord import *
 from discord.ext.commands import has_permissions
 from termcolor import colored
 
-from cogs.config import get_lang, get_prefix, get_default_prefix, debug
+from cogs.config import get_lang, get_prefix, get_default_prefix, debug, get_bot_version, get_bot_owner
 
 client = commands.Bot(command_prefix=get_prefix)
 client.remove_command('help')
@@ -19,7 +18,7 @@ client.remove_command('help')
 
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
-cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo"]
+cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo", "broadcast"]
 os.system('color')
 os.system('cls')
 
@@ -33,7 +32,9 @@ os.system('cls')
 
 @client.command()
 async def console(ctx):
-    if ctx.message.author.id != 130313080545607680:
+    if ctx.message.author.id != get_bot_owner():
+        raise commands.CheckFailure
+    if not debug():
         raise commands.CheckFailure
     else:
         print(colored("Que voulez-vous faire ? (help pour la liste des commandes)", "yellow"))
@@ -81,10 +82,10 @@ def on_ready_print():
     print(colored(client.user.name, "yellow"))
     print(colored(client.user.id, "green"))
     print(f'module discord en version {colored(discord.__version__, "green")}')
-    print('Version actuelle du bot : ' + colored(f"{versionBot}", "green"))
+    print('Version actuelle du bot : ' + colored(f"{get_bot_version()}", "green"))
     print(f'Dans {len(list(client.guilds))} serveurs.')
     print(colored('------', "red"))
-    print(f'Commandes : {[cmd for cmd in cmds]}')
+    print(f"Commandes : {', '.join(cmds)}")
     print(f'Command Prefix : {colored(";", "yellow")}')
     print(colored('------', "red"))
     print(' ')
@@ -94,7 +95,7 @@ async def on_ready():
     os.system('cls')
     on_ready_print()
 
-    await client.change_presence(activity=discord.Game(f'{versionBot} | ;help'))
+    await client.change_presence(activity=discord.Game(f'{get_bot_version()} | ;help'))
     #change_status.start()
 
 @client.event
@@ -172,7 +173,7 @@ async def help(ctx):
 @client.command()
 async def changelog(ctx, version=""):
     if not version:
-        version = versionBot
+        version = get_bot_version()
     changelogs = json.load(open("json/changelogs.json", 'r'))
     c = json.load(open("json/serverconfig.json", 'r'))
 

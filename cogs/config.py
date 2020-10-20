@@ -1,12 +1,26 @@
 import os, json, asyncio, aiohttp
 
+### variables globales ###
+
 debug_value = True
+versionBot = "v0.0.3"
+default_prefix = ";"
+
+### Fonctions return ###
 
 def debug():
     return debug_value
 
+def get_bot_version():
+    return versionBot
+
 def get_default_prefix():
-    return ";"
+    return default_prefix
+
+def get_bot_owner():
+    return 130313080545607680 # Chance this value to the bot's owner discord id.
+
+### Fonctions helpers ###
 
 def get_lang(context, field):
     lang = json.load(open("json/lang.json", "r"))
