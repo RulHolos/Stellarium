@@ -1,4 +1,14 @@
 {
+  "v0.0.4": {
+    "en": {
+      "+": "Added a bunch of new commands and features.\nInternal code optimization resulting in faster command execution.",
+      "-": "///"
+    },
+    "fr": {
+      "+": "Ajout de pas mal de nouvelles commandes.\nOptimisation interne du code r\u00E9sultant en une ex\u00E9cution plus rapide.",
+      "-": "///"
+    }
+  },
   "v0.0.3": {
     "en": {
       "+": "Github repo.\nInternal code optimization.\nAdded permissions checks to setLang and setPrefix.",

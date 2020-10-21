@@ -11,7 +11,7 @@
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
     "lvl": 6,
-    "xp": 1435,
+    "xp": 1880,
     "private": false,
     "InviteLinks": {
       "7562a2ab-588e-48bc-bc44-7cf64b75552a--7909": "Exists"
@@ -48,7 +48,7 @@
     "creator": 130313080545607680,
     "creatorRoleColor": 7751053,
     "lvl": 7,
-    "xp": 2450,
+    "xp": 2905,
     "private": true,
     "InviteLinks": {},
     "Items": {},
@@ -81,14 +81,13 @@
     "id": "930d74c7-d468-4fb7-b6b5-fa5ba1e76fdd",
     "desc": "",
     "members": {
-      "571813392558325771": 571813392558325771,
-      "130313080545607680": 130313080545607680
+      "571813392558325771": 571813392558325771
     },
     "MaxSlots": 5,
     "creator": 571813392558325771,
     "creatorRoleColor": 1819961,
     "lvl": 7,
-    "xp": 3600,
+    "xp": 3655,
     "private": false,
     "InviteLinks": {},
     "Items": {},
@@ -128,7 +127,9 @@
     "private": false,
     "InviteLinks": {},
     "Items": {},
-    "Badges": {},
+    "Badges": {
+      "**At the top of the World**": "**At the top of the World**"
+    },
     "created_at": "03/09/2020 (d/m/y)"
   }
 }

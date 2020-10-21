@@ -18,7 +18,7 @@ client.remove_command('help')
 
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
-cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo", "broadcast"]
+cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo", "broadcast", "template"]
 os.system('color')
 os.system('cls')
 
@@ -60,6 +60,7 @@ async def console(ctx):
         elif cmd.upper() == "LISTSERVS":
             for servs in list(client.guilds):
                 print(f"{servs.name} -> {servs.id}")
+            await console(ctx)
         elif cmd.upper() == "EXIT":
             os.system('cls')
             on_ready_print()
@@ -143,32 +144,38 @@ async def on_command_error(ctx, error):
 # # # Commandes # # #
 
 @client.command(aliases=["aide", "Aide", "Help"])
-async def help(ctx):
+async def help(ctx, page=""):
+    hpage = page or "1"
     guild = str(ctx.guild.id)
     embed = discord.Embed(colour=ctx.author.top_role.colour.value)
-    embed.set_footer(text="help page 1/1")
+    embed.set_footer(text=f"help page {hpage}/2")
     c = json.load(open("json/serverconfig.json", 'r'))
     p = c[str(ctx.guild.id)]["prefix"]
 
-    embed.add_field(name=f'{p}setPrefix <prefix>', value="Change prefix", inline=True)
-    embed.add_field(name=f"{p}userinfo", value=f'{get_lang(guild, "help_01")}', inline=True)
-    embed.add_field(name=f"{p}roll <valeur>d<valeur>", value=f'{get_lang(guild, "help_02")}', inline=True)
-    embed.add_field(name=f"{p}setLang <prefix>", value=f'{get_lang(guild, "help_03")}', inline=True)
-    embed.add_field(name=f"{p}serverinfo", value=get_lang(guild, "help_04"), inline=True)
-    embed.add_field(name=f"{p}ban/{p}kick <user>", value=get_lang(guild, "help_05"), inline=True)
-    embed.add_field(name=f'{p}CreateGuild "name" [-d "Description"] [-p]', value=get_lang(guild, "help_06"), inline=True)
-    embed.add_field(name=f"{p}GuildInfo <name>", value=get_lang(guild, "help_07"), inline=True)
-    embed.add_field(name=f'{p}EditGuildDesc "name" "description"', value=get_lang(guild, "help_08"), inline=True)
-    embed.add_field(name=f"{p}JoinGuild/{p}LeaveGuild <guild>", value=get_lang(guild, "help_09"), inline=True)
-    embed.add_field(name=f"{p}DeleteGuild <GuildID>", value=get_lang(guild, "help_10"), inline=True)
-    embed.add_field(name=f"{p}GuildLink <GuildID>", value=get_lang(guild, "help_11"), inline=True)
-    embed.add_field(name=f"{p}TogglePrivate <GuildID>", value=get_lang(guild, "help_12"), inline=True)
-    embed.add_field(name=f"{p}leaderboard", value=get_lang(guild, "help_13"), inline=True)
-    embed.add_field(name=f"{p}GuildShop <name>", value=get_lang(guild, "help_14"), inline=True)
-    embed.add_field(name=f"{p}SCP <[1234567890]>", value=get_lang(guild, "help_15"), inline=True)
-    embed.add_field(name=f"{p}weather city", value=get_lang(guild, "help_16"), inline=True)
-
-    await ctx.send(embed=embed)
+    if hpage == "1":
+        embed.add_field(name=f'{p}setPrefix <prefix>', value="Change prefix", inline=True)
+        embed.add_field(name=f"{p}userinfo", value=f'{get_lang(guild, "help_01")}', inline=True)
+        embed.add_field(name=f"{p}roll <valeur>d<valeur>", value=f'{get_lang(guild, "help_02")}', inline=True)
+        embed.add_field(name=f"{p}setLang <prefix>", value=f'{get_lang(guild, "help_03")}', inline=True)
+        embed.add_field(name=f"{p}serverinfo", value=get_lang(guild, "help_04"), inline=True)
+        embed.add_field(name=f"{p}ban/{p}kick <user>", value=get_lang(guild, "help_05"), inline=True)
+        embed.add_field(name=f'{p}CreateGuild "name" [-d "Description"] [-p]', value=get_lang(guild, "help_06"), inline=True)
+        embed.add_field(name=f"{p}GuildInfo <name>", value=get_lang(guild, "help_07"), inline=True)
+        embed.add_field(name=f'{p}EditGuildDesc "name" "description"', value=get_lang(guild, "help_08"), inline=True)
+        embed.add_field(name=f"{p}JoinGuild/{p}LeaveGuild <guild>", value=get_lang(guild, "help_09"), inline=True)
+        embed.add_field(name=f"{p}DeleteGuild <GuildID>", value=get_lang(guild, "help_10"), inline=True)
+        embed.add_field(name=f"{p}GuildLink <GuildID>", value=get_lang(guild, "help_11"), inline=True)
+        embed.add_field(name=f"{p}TogglePrivate <GuildID>", value=get_lang(guild, "help_12"), inline=True)
+        embed.add_field(name=f"{p}leaderboard", value=get_lang(guild, "help_13"), inline=True)
+        embed.add_field(name=f"{p}GuildShop <name>", value=get_lang(guild, "help_14"), inline=True)
+        embed.add_field(name=f"{p}SCP <[1234567890]>", value=get_lang(guild, "help_15"), inline=True)
+        embed.add_field(name=f"{p}weather city", value=get_lang(guild, "help_16"), inline=True)
+        await ctx.send(embed=embed)
+    elif hpage == "2":
+        embed.add_field(name=f'{p}create_template [name]', value=get_lang(guild, "help_17"), inline=True)
+        await ctx.send(embed=embed)
+    else:
+        await ctx.send(get_lang(guild, "PageDontExists"))
 
 @client.command()
 async def changelog(ctx, version=""):

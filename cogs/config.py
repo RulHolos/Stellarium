@@ -3,7 +3,7 @@ import os, json, asyncio, aiohttp
 ### variables globales ###
 
 debug_value = True
-versionBot = "v0.0.3"
+versionBot = "v0.0.4"
 default_prefix = ";"
 
 ### Fonctions return ###

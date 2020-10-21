@@ -266,7 +266,7 @@ class guildes(commands.Cog):
     @commands.command(aliases=["Leaderboard"])
     async def leaderboard(self, ctx):
         guildjson = json.load(open("json/guilds.json", 'r'))
-        sort = sorted(guildjson, key=lambda x: guildjson[x].get("lvl", 0), reverse=True)
+        sort = sorted(guildjson, key=lambda x: guildjson[x].get("xp", 0), reverse=True)
         leaderboardList = {}
         for guilds in range(0, 5):
             try:
