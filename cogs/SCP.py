@@ -1,13 +1,14 @@
 import discord, re
 from discord.ext import commands
 
-from cogs.config import get_lang
+from cogs.config import get_lang, cmdcheck
 
 class SCP(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.command(aliases=["scp"])
+    @cmdcheck("scp")
     async def SCP(self, ctx, scp=""):
         if scp:
             scpIn = scp.upper()

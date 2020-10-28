@@ -1,13 +1,14 @@
 import discord, json
 from discord.ext import commands
 
-from cogs.config import get_lang
+from cogs.config import get_lang, cmdcheck
 
 class infos(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.command()
+    @cmdcheck("userinfo")
     async def userinfo(self, ctx, *, user: discord.Member = None):
         user = user or ctx.author
         guild = str(ctx.guild.id)
@@ -33,6 +34,7 @@ class infos(commands.Cog):
         await ctx.send(content=f"Informations de **{user.id}**", embed=embed)
 
     @commands.command()
+    @cmdcheck("serverinfo")
     async def serverinfo(self, ctx):
         conf = json.load(open("json/serverconfig.json", 'r'))
         user = ctx.author
@@ -50,6 +52,7 @@ class infos(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
+    @cmdcheck("infos")
     async def infos(self, ctx):
         gId = ctx.guild.id
         bot = self.client.get_user(746348869574459472)

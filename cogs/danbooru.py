@@ -1,11 +1,14 @@
 import discord, json, secrets, random, re, uuid
 from discord.ext import commands
 
+from cogs.config import cmdcheck
+
 class danbooru(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.command()
+    @cmdcheck("danbooru")
     async def danbooru(self, ctx, *, tag=""):
         from pybooru import Danbooru
         dan = Danbooru('danbooru')

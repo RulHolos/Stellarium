@@ -9,16 +9,19 @@ from discord import *
 from discord.ext.commands import has_permissions
 from termcolor import colored
 
-from cogs.config import get_lang, get_prefix, get_default_prefix, debug, get_bot_version, get_bot_owner
+from cogs.config import get_lang, get_prefix, get_default_prefix, debug, get_bot_version, get_bot_owner, cmdcheck, CmdCheckError
 
 client = commands.Bot(command_prefix=get_prefix)
 client.remove_command('help')
+
+# TODO: Faire des commandes togglables sur chaque serveur, avec un check qui va avec + une list dans serverconfig
+# Faire une list (non-json) dans config.py des commandes toggleables et faire un cog pour toggle ces commandes.
 
 # # # Variables # # #
 
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
-cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo", "broadcast", "template"]
+cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo", "broadcast", "template", "togglecmd"]
 os.system('color')
 os.system('cls')
 
@@ -107,6 +110,7 @@ async def on_guild_join(guild):
     conf[Iguild]["lang"] = "en"
     conf[Iguild]["creator"] = guild.owner.id
     conf[Iguild]["prefix"] = get_default_prefix()
+    conf[Iguild]["cmds"] = {}
 
     with open('json/serverconfig.json', 'w') as sConfSave:
         json.dump(conf, sConfSave, indent=2)
@@ -137,6 +141,8 @@ async def on_command_error(ctx, error):
         await ctx.send(get_lang(str(ctx.guild.id), "BadArgument"))
     if isinstance(error, commands.CommandNotFound): # Une commande n'est pas trouvée.
         await ctx.send(f'{get_lang(str(ctx.guild.id), "CommandNotFound")} : `{ctx.message.content}`')
+    if isinstance(error, CmdCheckError): # Une commande n'est pas utilisable sur un serveur
+        await ctx.send(get_lang(str(ctx.guild.id), "CmdCheckError"))
     if isinstance(error, RuntimeError):
         pass
     print(error)
@@ -173,11 +179,14 @@ async def help(ctx, page=""):
         await ctx.send(embed=embed)
     elif hpage == "2":
         embed.add_field(name=f'{p}create_template [name]', value=get_lang(guild, "help_17"), inline=True)
+        embed.add_field(name=f'{p}ToggleCmd [cmd]', value=get_lang(guild, "help_18"), inline=True)
+        embed.add_field(name=f'{p}nocmd', value=get_lang(guild, "help_19"), inline=True)
         await ctx.send(embed=embed)
     else:
         await ctx.send(get_lang(guild, "PageDontExists"))
 
 @client.command()
+@cmdcheck("changelog")
 async def changelog(ctx, version=""):
     if not version:
         version = get_bot_version()

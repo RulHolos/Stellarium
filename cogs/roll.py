@@ -1,13 +1,14 @@
 import discord, json, secrets, random, re
 from discord.ext import commands
 
-from cogs.config import get_lang
+from cogs.config import get_lang, cmdcheck
 
 class roll(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.command(aliases=["roll", 'R', 'Roll', 'ROLL'])
+    @cmdcheck("roll")
     async def r(self, ctx, jet=""):
         if jet:
             if (jet.upper() == "MOL" or jet.upper() == "AVOGADRO"):

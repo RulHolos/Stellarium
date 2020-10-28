@@ -2,7 +2,7 @@ import discord, json, random, uuid, asyncio, argparse
 from datetime import date
 from discord.ext import commands
 
-from cogs.config import get_lang
+from cogs.config import get_lang, cmdcheck
 
 class guildes(commands.Cog):
     def __init__(self, client):
@@ -10,6 +10,7 @@ class guildes(commands.Cog):
 
 
     @commands.command(aliases=["GuildInfo"])
+    @cmdcheck("Guild")
     async def guildInfo(self, ctx, *, name=""):
         if name:
             guildjson = json.load(open("json/guilds.json", 'r'))
@@ -34,6 +35,7 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command(aliases=["createGuild", "createguild"])
+    @cmdcheck("Guild")
     async def CreateGuild(self, ctx, *args):
         try:
             parser = argparse.ArgumentParser()
@@ -70,6 +72,7 @@ class guildes(commands.Cog):
 
 
     @commands.command(aliases=["editguilddesc", "editGuildDesc"])
+    @cmdcheck("Guild")
     async def EditGuildDesc(self, ctx, *args):
         try:
             parser = argparse.ArgumentParser()
@@ -96,6 +99,7 @@ class guildes(commands.Cog):
         except: raise commands.BadArgument
 
     @commands.command(aliases=["joinguild", "joinGuild", "Joinguild"])
+    @cmdcheck("Guild")
     async def JoinGuild(self, ctx, name=""):
         guildjson = json.load(open("json/guilds.json", 'r'))
         if name:
@@ -127,6 +131,7 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
+    @cmdcheck("Guild")
     async def LeaveGuild(self, ctx, name=""):
         """ Quitter une guilde dont fait parti une personne. """
         guildjson = json.load(open("json/guilds.json", 'r'))
@@ -147,6 +152,7 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
+    @cmdcheck("Guild")
     async def GuildLink(self, ctx, id=""):
         guildjson = json.load(open("json/guilds.json", 'r'))
         if id:
@@ -165,6 +171,7 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
+    @cmdcheck("Guild")
     async def DeleteGuild(self, ctx, id=""):
         guildjson = json.load(open("json/guilds.json", 'r'))
         if id:
@@ -182,6 +189,7 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command()
+    @cmdcheck("Guild")
     async def TogglePrivate(self, ctx, id=""):
         guildjson = json.load(open("json/guilds.json", 'r'))
         if id:
@@ -199,6 +207,7 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command(aliases=["guildshop"])
+    @cmdcheck("Guild")
     async def GuildShop(self, ctx, *, name=""):
         if name:
             guildjson = json.load(open("json/guilds.json", 'r'))
@@ -264,6 +273,7 @@ class guildes(commands.Cog):
         else: await ctx.send(get_lang(ctx.guild.id, "ProvideGuildName"))
 
     @commands.command(aliases=["Leaderboard"])
+    @cmdcheck("Guild")
     async def leaderboard(self, ctx):
         guildjson = json.load(open("json/guilds.json", 'r'))
         sort = sorted(guildjson, key=lambda x: guildjson[x].get("xp", 0), reverse=True)
@@ -303,6 +313,7 @@ LVL = {guildjson[leaderboardList[4]]["lvl"]}. EXP = {guildjson[leaderboardList[4
                 json.dump(guildjson, f, indent=2)
 
     @commands.command(aliases=["Badges", "Badge", "badge"])
+    @cmdcheck("Guild")
     async def badges(self, ctx, *, badge=""):
         """ Voir les différents badges existants avec leur description """
         if badge:

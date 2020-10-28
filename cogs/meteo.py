@@ -1,13 +1,14 @@
 import discord, json, secrets, random, re, requests
 from discord.ext import commands
 
-from cogs.config import get_lang
+from cogs.config import get_lang, cmdcheck
 
 class meteo(commands.Cog):
     def __init__(self, client):
         self.client = client
 
     @commands.command(aliases=["météo", "weather"])
+    @cmdcheck("meteo")
     async def meteo(self, ctx, *, ville=""):
         try:
             meteo = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={ville}&appid=1bddba383a9e908290b5482be115a4ca&units=metric")

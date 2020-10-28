@@ -9,7 +9,7 @@ class setLang(commands.Cog):
         self.client = client
 
     @commands.command()
-    @has_permissions(manage_channels=True)
+    @has_permissions(administrator=True)
     async def setLang(self, ctx, *, language=""):
         conf = json.load(open("json/serverconfig.json", 'r'))
 
