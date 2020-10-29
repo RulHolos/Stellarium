@@ -9,7 +9,8 @@ from discord import *
 from discord.ext.commands import has_permissions
 from termcolor import colored
 
-from cogs.config import get_lang, get_prefix, get_default_prefix, debug, get_bot_version, get_bot_owner, cmdcheck, CmdCheckError
+from cogs.config import (get_lang, get_prefix, get_default_prefix, debug,
+                        get_bot_version, get_bot_owner, cmdcheck, CmdCheckError, debugcheck, DebugCheckError)
 
 client = commands.Bot(command_prefix=get_prefix)
 client.remove_command('help')
@@ -34,10 +35,9 @@ os.system('cls')
 # # # console # # #
 
 @client.command()
+@debugcheck()
 async def console(ctx):
     if ctx.message.author.id != get_bot_owner():
-        raise commands.CheckFailure
-    if not debug():
         raise commands.CheckFailure
     else:
         print(colored("Que voulez-vous faire ? (help pour la liste des commandes)", "yellow"))
@@ -65,6 +65,9 @@ async def console(ctx):
                 print(f"{servs.name} -> {servs.id}")
             await console(ctx)
         elif cmd.upper() == "EXIT":
+            os.system('cls')
+            on_ready_print()
+        else:
             os.system('cls')
             on_ready_print()
             
@@ -143,6 +146,8 @@ async def on_command_error(ctx, error):
         await ctx.send(f'{get_lang(str(ctx.guild.id), "CommandNotFound")} : `{ctx.message.content}`')
     if isinstance(error, CmdCheckError): # Une commande n'est pas utilisable sur un serveur
         await ctx.send(get_lang(str(ctx.guild.id), "CmdCheckError"))
+    if isinstance(error, DebugCheckError): # Le mode global debug est activé sur le bot
+        await ctx.send(get_lang(str(ctx.guild.id), "Debug_Check"))
     if isinstance(error, RuntimeError):
         pass
     print(error)

@@ -25,7 +25,7 @@ def get_default_prefix():
     return default_prefix
 
 def get_bot_owner():
-    return 130313080545607680 # Chance this value to the bot's owner discord id.
+    return 130313080545607680 # Change this value to the bot's owner discord id.
 
 def get_t_cmd():
     """Returns the list of toggleable cmds (not supported by all cmds)"""
@@ -54,13 +54,14 @@ class CmdCheckError(commands.CommandError):
     """Exception raised by cmdcheck() custom check"""
     pass
 
+class DebugCheckError(commands.CommandError):
+    """Exception raised by debugcheck() custom check"""
+    pass
+
 ### Checks ###
 
-# Si la commande est activée, ça autorise le check,
-# sinon, le check renvois une CheckFailure et on la catch pour renvoyer une custom error
-
 def cmdcheck(cmd:str):
-    def predicate(ctx):
+    def predicate_cmd(ctx):
         with open("json/serverconfig.json", 'r') as f:
             conf = json.load(f)
             # Si la commande voulue est présente dans le dict, alors on renvois true
@@ -69,4 +70,12 @@ def cmdcheck(cmd:str):
             #return False
         else:
             return True
-    return commands.check(predicate)
+    return commands.check(predicate_cmd)
+
+def debugcheck():
+    def predicate_debug(ctx):
+        if not debug_value:
+            raise DebugCheckError
+        else:
+            return True
+    return commands.check(predicate_debug)
