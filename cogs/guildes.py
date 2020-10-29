@@ -2,7 +2,8 @@ import discord, json, random, uuid, asyncio, argparse
 from datetime import date
 from discord.ext import commands
 
-from cogs.config import get_lang, cmdcheck
+from helpers.config import get_lang
+from helpers.checks import cmdcheck
 
 class guildes(commands.Cog):
     def __init__(self, client):

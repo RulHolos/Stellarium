@@ -1,7 +1,7 @@
 import discord, json, secrets, random, re, uuid
 from discord.ext import commands
 
-from cogs.config import cmdcheck
+from helpers.checks import cmdcheck
 
 class danbooru(commands.Cog):
     def __init__(self, client):

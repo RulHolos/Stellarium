@@ -1,7 +1,7 @@
 import discord, re
 from discord.ext import commands
 
-from cogs.config import get_lang, get_bot_owner
+from helpers.config import get_lang, get_bot_owner
 
 class broadcast(commands.Cog):
     def __init__(self, client):

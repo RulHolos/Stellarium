@@ -7,16 +7,11 @@ from discord.ext.commands import has_permissions
 
 ### variables globales ###
 
-debug_value = True
 versionBot = "v0.0.4"
 default_prefix = ";"
 Togglable_cmds = ["changelog", "scp", "danbooru", "userinfo", "serverinfo", "infos", "meteo", "roll", "guild"]
 
 ### Fonctions return ###
-
-def debug():
-    """Returns the value of the global debug variable"""
-    return debug_value
 
 def get_bot_version():
     return versionBot
@@ -47,35 +42,3 @@ async def get_prefix(client, message):
         return conf1[str(guild.id)]["prefix"]
     else:
         return get_default_prefix()
-
-### Errors ###
-
-class CmdCheckError(commands.CommandError):
-    """Exception raised by cmdcheck() custom check"""
-    pass
-
-class DebugCheckError(commands.CommandError):
-    """Exception raised by debugcheck() custom check"""
-    pass
-
-### Checks ###
-
-def cmdcheck(cmd:str):
-    def predicate_cmd(ctx):
-        with open("json/serverconfig.json", 'r') as f:
-            conf = json.load(f)
-            # Si la commande voulue est présente dans le dict, alors on renvois true
-        if cmd.lower() in conf[str(ctx.guild.id)]["cmds"]:
-            raise CmdCheckError()
-            #return False
-        else:
-            return True
-    return commands.check(predicate_cmd)
-
-def debugcheck():
-    def predicate_debug(ctx):
-        if not debug_value:
-            raise DebugCheckError
-        else:
-            return True
-    return commands.check(predicate_debug)

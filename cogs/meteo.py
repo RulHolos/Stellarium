@@ -1,7 +1,8 @@
 import discord, json, secrets, random, re, requests
 from discord.ext import commands
 
-from cogs.config import get_lang, cmdcheck
+from helpers.config import get_lang
+from helpers.checks import cmdcheck
 
 class meteo(commands.Cog):
     def __init__(self, client):

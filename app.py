@@ -9,20 +9,20 @@ from discord import *
 from discord.ext.commands import has_permissions
 from termcolor import colored
 
-from cogs.config import (get_lang, get_prefix, get_default_prefix, debug,
-                        get_bot_version, get_bot_owner, cmdcheck, CmdCheckError, debugcheck, DebugCheckError)
+from helpers.config import get_lang, get_prefix, get_default_prefix, get_bot_version, get_bot_owner
+from helpers.errors import CmdCheckError, DebugCheckError
+from helpers.checks import cmdcheck, debugcheck
 
 client = commands.Bot(command_prefix=get_prefix)
 client.remove_command('help')
 
-# TODO: Faire des commandes togglables sur chaque serveur, avec un check qui va avec + une list dans serverconfig
-# Faire une list (non-json) dans config.py des commandes toggleables et faire un cog pour toggle ces commandes.
 
 # # # Variables # # #
 
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
-cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru", "SCP", "meteo", "broadcast", "template", "togglecmd"]
+cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru",
+        "SCP", "meteo", "broadcast", "template", "togglecmd"]
 os.system('color')
 os.system('cls')
 
@@ -93,7 +93,7 @@ def on_ready_print():
     print(f'Dans {len(list(client.guilds))} serveurs.')
     print(colored('------', "red"))
     print(f"Commandes : {', '.join(cmds)}")
-    print(f'Command Prefix : {colored(";", "yellow")}')
+    print(f'General Command Prefix : {colored(";", "yellow")}')
     print(colored('------', "red"))
     print(' ')
 

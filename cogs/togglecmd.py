@@ -2,7 +2,8 @@ import discord, re, json
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 
-from cogs.config import get_lang, cmdcheck, get_t_cmd
+from helpers.config import get_lang, get_t_cmd
+from helpers.checks import cmdcheck
 
 class ToggleCmd(commands.Cog):
     def __init__(self, client):

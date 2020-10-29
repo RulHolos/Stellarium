@@ -1,7 +1,8 @@
 import discord, re
 from discord.ext import commands
 
-from cogs.config import get_lang, cmdcheck
+from helpers.config import get_lang
+from helpers.checks import cmdcheck
 
 class SCP(commands.Cog):
     def __init__(self, client):

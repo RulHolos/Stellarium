@@ -3,7 +3,7 @@ from discord import File
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 
-from cogs.config import get_lang
+from helpers.config import get_lang
 
 class template(commands.Cog):
     def __init__(self, client):
