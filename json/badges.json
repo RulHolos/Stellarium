@@ -22,5 +22,11 @@
     "id": 3,
     "en": "Get 50 members at least one time in the guild.",
     "fr": "Atteingnez les 50 membres au moins une fois."
+  },
+  "Wow, you paid 30 lvls for nothing": {
+    "name": "Wow, you paid 30 lvls for nothing",
+    "id": 4,
+    "en": "Get it from the guild shop.",
+    "fr": "Obtenez-le du shop des guildes."
   }
 }

@@ -1,9 +1,9 @@
-import discord, json
+import discord, json, argparse, re
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 from discord.utils import get
 
-from cogs.config import get_lang
+from helpers.config import get_lang
 
 class moderation(commands.Cog):
     def __init__(self, client):

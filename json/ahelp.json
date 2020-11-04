@@ -1,0 +1,48 @@
+{
+    "en": {
+        "setPrefix": {
+            "permissions": "Administrator",
+            "purpose": "Using this command with an argument change the whole bot command prefix for your server by the one you give.",
+            "usage": "setPrefix <the prefix you want>",
+            "aliases": "setprefix, SetPrefix, Setprefix",
+            "restrictions": "N/A"
+        },
+        "userinfo": {
+            "permissions": "User",
+            "purpose": "This command is used to recover informations about a given user or yourself.",
+            "usage": "userinfo [user mention]",
+            "aliases": "N/A",
+            "restrictions": "Guild Config"
+        },
+        "roll": {
+            "permissions": "User",
+            "purpose": "Rolls a random number between x and y.",
+            "usage": "roll <x>d<y>",
+            "aliases": "r, R, Roll, ROLL",
+            "restrictions": "Guild Config"
+        }
+    },
+    "fr": {
+        "setPrefix": {
+            "permissions": "Administrateur",
+            "purpose": "Cette commande permet de changer le prefix utilise pour les commandes dans votre serveur.",
+            "usage": "setPrefix <Le prefix voulu>",
+            "aliases": "setprefix, SetPrefix, Setprefix",
+            "restrictions": "N/A"
+        },
+        "userinfo": {
+            "permissions": "Utilisateur",
+            "purpose": "Cette command est utilis\u00E9e pour r\u00E9cup\u00E9rer des informations sur des membres ou vous.",
+            "usage": "userinfo [mention d'un membre]",
+            "aliases": "N/A",
+            "restrictions": "Configuration de Guilde" 
+        },
+        "roll": {
+            "permissions": "Utilisateur",
+            "purpose": "Donne un nombre au hasard entre x et y.",
+            "usage": "roll <x>d<y>",
+            "aliases": "r, R, Roll, ROLL",
+            "restrictions": "Configuration de Guilde"
+        }
+    }
+}
