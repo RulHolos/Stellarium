@@ -19,6 +19,7 @@
     "help_17": "Cr\u00E9er une template des channels et cat\u00E9gories de votre serveur.",
     "help_18": "Active/D\u00E9sactive une certaine commande sur votre serveur.",
     "help_19": "Voir les commandes d\u00E9sactiv\u00E9es sur ce serveur.",
+    "help_20": "Obtenir les renseignements d'une certaine commande.",
     "SetPrefixSuccess": "Pr\u00E9fix du serveur chang\u00E9 avec succ\u00E8s avec",
     "InvalidLanguage": "Langue choisie invalide. Langues disponibles : 'en' et 'fr'.",
     "SetLangSuccess": "La langue a bien \u00E9t\u00E9 modifi\u00E9e en",
@@ -71,7 +72,8 @@
     "PageDontExists": "Cette page n'existe pas.",
     "CmdCheckError": "Cette commande n'est pas activ\u00E9e sur ce serveur.",
     "ToggleCmdNotSupported": "Vous ne pouvez pas activer/d\u00E9sactiver cette commande.",
-    "ToggleCmdUpdated": "Status de la commande mis \u00E0 jour."
+    "ToggleCmdUpdated": "Status de la commande mis \u00E0 jour.",
+    "CmdDontExists": "Cette commande n'existe pas."
   },
 
   "en" : {
@@ -94,6 +96,7 @@
     "help_17": "Create a template of the channels and categories of your server.",
     "help_18": "Activate/Desactivate a command on your server.",
     "help_19": "See the list of not available commands on this server.",
+    "help_20": "Get the full description of a given command.",
     "SetPrefixSuccess": "Server's prefix successfuly changed",
     "InvalidLanguage": "Invalid language. Languages avaiable : 'en' and 'fr'.",
     "SetLangSuccess": "The language as been modified to",
@@ -146,6 +149,7 @@
     "PageDontExists": "This page doesn't exists.",
     "CmdCheckError": "This command is not available on this server.",
     "ToggleCmdNotSupported": "This command cannot be turned on or off on your server.",
-    "ToggleCmdUpdated": "Command status updated."
+    "ToggleCmdUpdated": "Command status updated.",
+    "CmdDontExists": "This command doesn't exists."
   }
 }

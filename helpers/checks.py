@@ -6,10 +6,27 @@ from discord import *
 from discord.ext.commands import has_permissions
 
 from .errors import CmdCheckError, DebugCheckError
-
-debug_value = True
+from .config import debug_value
 
 def cmdcheck(cmd:str):
+    """
+    Checking the state of a cmd in the ctx server
+    
+    Parameters
+    ----------
+    cmd: :class:`str`
+        the name of the command to check.
+
+    Returns
+    -------
+    :bool:`True`
+        The command is available.
+
+    Raises
+    ------
+    helpers.error.CmdCheckError
+        The check fails.
+    """
     def predicate_cmd(ctx):
         with open("json/serverconfig.json", 'r') as f:
             conf = json.load(f)
@@ -22,6 +39,17 @@ def cmdcheck(cmd:str):
     return commands.check(predicate_cmd)
 
 def debugcheck():
+    """Checking the state of the global debug mode.
+
+    Returns
+    -------
+    :bool:`True`
+        The debug mod is bot-wide active.
+    
+    Raises
+    ------
+    helpers.error.DebugCheckError
+        The check fails."""
     def predicate_debug(ctx):
         if not debug_value:
             raise DebugCheckError

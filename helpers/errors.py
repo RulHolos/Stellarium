@@ -1,14 +1,28 @@
-import os, json, asyncio, aiohttp, discord
-from discord.ext import commands, tasks
-from discord.utils import get
-from itertools import cycle
+import discord
+from discord.ext import commands
 from discord import *
-from discord.ext.commands import has_permissions
 
-class CmdCheckError(commands.CommandError):
-    """Exception raised by cmdcheck() custom check"""
+class StellariumError(commands.CommandError):
+    """Base error of Stellarium.
+
+    All Stellarium Exceptions must be subclasses of this class.
+
+    This Exception must never be raised directly.
+    ---------------------------------------------
+    
+    Subclass of :exc:`commands.CommandError`
+    """
+
+class CmdCheckError(StellariumError):
+    """Exception raised by cmdcheck() custom check.
+    
+    Subclass of :exc:`StellariumError`
+    """
     pass
 
-class DebugCheckError(commands.CommandError):
-    """Exception raised by debugcheck() custom check"""
+class DebugCheckError(StellariumError):
+    """Exception raised by debugcheck() custom check.
+    
+    Subclass of :exc:`StellariumError`
+    """
     pass
