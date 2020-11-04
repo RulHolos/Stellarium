@@ -39,7 +39,8 @@ class help(commands.Cog):
             embed.add_field(name=f'{p}create_template [name]', value=get_lang(guild, "help_17"), inline=True)
             embed.add_field(name=f'{p}ToggleCmd [cmd]', value=get_lang(guild, "help_18"), inline=True)
             embed.add_field(name=f'{p}nocmd', value=get_lang(guild, "help_19"), inline=True)
-            embed.add_field(name=f'{p}ahelp', value=get_lang(guild, "help_20"), inline=True)
+            embed.add_field(name=f'{p}ahelp <cmd>', value=get_lang(guild, "help_20"), inline=True)
+            embed.add_field(name=f'{p}anime <anime>', value=get_lang(guild, "help_21"), inline=True)
             await ctx.send(embed=embed)
         else:
             await ctx.send(get_lang(guild, "PageDontExists"))

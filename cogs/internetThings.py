@@ -4,9 +4,17 @@ from discord.ext import commands
 from helpers.config import get_lang
 from helpers.checks import cmdcheck
 
-class SCP(commands.Cog):
+class internetThings(commands.Cog):
     def __init__(self, client):
         self.client = client
+
+    @commands.command(aliases=["nautiljon", "Anime"])
+    @cmdcheck("anime")
+    async def anime(self, ctx, *, anime=""):
+        if anime:
+            anime = anime.split()
+            await ctx.send(f"https://www.nautiljon.com/animes/{'+'.join(anime)}.html")
+        else: await ctx.send(get_lang(ctx.guild.id, "argumentNeeded"))
 
     @commands.command(aliases=["scp"])
     @cmdcheck("scp")
@@ -21,4 +29,4 @@ class SCP(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(SCP(client))
+    client.add_cog(internetThings(client))

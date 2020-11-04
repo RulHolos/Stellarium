@@ -10,7 +10,7 @@ from discord.ext.commands import has_permissions
 debug_value = True
 versionBot = "v0.0.4"
 default_prefix = ";"
-Togglable_cmds = ["changelog", "scp", "danbooru", "userinfo", "serverinfo", "infos", "meteo", "roll", "guild"]
+Togglable_cmds = ["changelog", "scp", "danbooru", "userinfo", "serverinfo", "infos", "meteo", "roll", "guild", "anime"]
 
 ### Fonctions return ###
 

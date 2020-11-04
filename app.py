@@ -22,7 +22,7 @@ client.remove_command('help')
 LienInvitation = "https://discordapp.com/oauth2/authorize?client_id=746348869574459472&scope=bot&permissions=2012740695"
 #status = cycle(['by Atae Kurri#6302 | ;help', f'{versionBot} | ;help', ';help for help'])
 cmds = ["guildes", "infos", "roll", "setLang", "moderation", "prefixGestion", "danbooru",
-        "SCP", "meteo", "broadcast", "template", "togglecmd", "help"]
+        "meteo", "broadcast", "template", "togglecmd", "help", "internetThings"]
 os.system('color')
 os.system('cls')
 
