@@ -20,12 +20,19 @@
             "usage": "roll <x>d<y>",
             "aliases": "r, R, Roll, ROLL",
             "restrictions": "Guild Config"
+        },
+        "setLang": {
+            "permissions": "Administrator",
+            "purpose": "Using this command with an argument change the whole bot language for your server by the one you give.",
+            "usage": "setLang <the lang code you want>",
+            "aliases": "N/A",
+            "restrictions": "N/A"
         }
     },
     "fr": {
         "setPrefix": {
             "permissions": "Administrateur",
-            "purpose": "Cette commande permet de changer le prefix utilise pour les commandes dans votre serveur.",
+            "purpose": "Cette commande permet de changer le prefix utilis\u00E9 pour les commandes dans votre serveur.",
             "usage": "setPrefix <Le prefix voulu>",
             "aliases": "setprefix, SetPrefix, Setprefix",
             "restrictions": "N/A"
@@ -43,6 +50,13 @@
             "usage": "roll <x>d<y>",
             "aliases": "r, R, Roll, ROLL",
             "restrictions": "Configuration de Guilde"
+        },
+        "setLang": {
+            "permissions": "Administrateur",
+            "purpose": "Cette commande permet de changer la langue utilis\u00E9e pour le bot dans votre serveur.",
+            "usage": "setLang <Le code lang>",
+            "aliases": "N/A",
+            "restrictions": "N/A"
         }
     }
 }

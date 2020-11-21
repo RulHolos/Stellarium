@@ -50,7 +50,7 @@ async def console(ctx):
             for servs in list(client.guilds):
                 print(f"{servs.name} -> {servs.id}")
             serv = int(input("> "))
-            
+
             print(colored("Quel channel voulez-vous ?", "yellow"))
             get_serv = client.get_guild(serv)
             for chans in get_serv.text_channels:
@@ -70,7 +70,7 @@ async def console(ctx):
         else:
             os.system('cls')
             on_ready_print()
-            
+
 async def console_send_msg(chan, ctx):
     print(colored("Que voulez-vous envoyer ? (S = stop)", "yellow"))
     msg = input("> ")
@@ -160,6 +160,8 @@ async def on_command_error(ctx, error):
 
     print(error)
 
+
+
 # # # Commandes # # #
 
 @client.command()
@@ -178,7 +180,6 @@ async def changelog(ctx, version=""):
     embed.add_field(name="-", value=changelogs[version][c[str(ctx.guild.id)]["lang"]]["-"], inline=False)
 
     await ctx.send(embed=embed)
-
 
 for cmd in cmds:
     client.load_extension(f"cogs.{cmd}")

@@ -12,6 +12,7 @@ class StellariumError(commands.CommandError):
     
     Subclass of :exc:`commands.CommandError`
     """
+    pass
 
 class CmdCheckError(StellariumError):
     """Exception raised by cmdcheck() custom check.

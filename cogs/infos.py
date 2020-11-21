@@ -37,7 +37,8 @@ class infos(commands.Cog):
     @commands.command()
     @cmdcheck("serverinfo")
     async def serverinfo(self, ctx):
-        conf = json.load(open("json/serverconfig.json", 'r'))
+        with open("json/serverconfig.json", 'r') as f:
+            conf = json.load(f)
         user = ctx.author
         guild = ctx.guild
         gId = str(ctx.guild.id)
@@ -45,8 +46,8 @@ class infos(commands.Cog):
         embed = discord.Embed(colour=user.top_role.colour.value)
         embed.set_thumbnail(url=guild.icon_url)
         embed.set_author(name=guild.name)
-
-        embed.add_field(name=get_lang(gId, "Creator"), value=self.client.get_user(conf[gId]["creator"]).name, inline=False)
+        
+        # embed.add_field(name=get_lang(gId, "Creator"), value=guild.owner.nick, inline=False)
         embed.add_field(name=get_lang(gId, "Members"), value=len(guild.members), inline=True)
         embed.add_field(name="Roles", value=len(guild.roles), inline=True)
 
