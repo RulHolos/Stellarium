@@ -13,7 +13,7 @@ from helpers.config import get_lang, get_prefix, get_default_prefix, get_bot_ver
 from helpers.errors import CmdCheckError, DebugCheckError
 from helpers.checks import cmdcheck, debugcheck
 
-client = commands.Bot(command_prefix=get_prefix)
+client = commands.AutoShardedBot(command_prefix=get_prefix)
 client.remove_command('help')
 
 
@@ -96,6 +96,7 @@ def on_ready_print():
     print(f'General Command Prefix : {colored(";", "yellow")}')
     print(colored('------', "red"))
     print(' ')
+    print(client.shards)
 
 @client.event
 async def on_ready():
