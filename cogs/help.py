@@ -2,6 +2,7 @@ import discord, re, json
 from discord.ext import commands
 
 from helpers.config import get_lang, get_prefix, get_guild_lang
+import helpers.afs_memory as afs
 
 class help(commands.Cog):
     def __init__(self, client):
@@ -13,8 +14,10 @@ class help(commands.Cog):
         guild = str(ctx.guild.id)
         embed = discord.Embed(colour=ctx.author.top_role.colour.value)
         embed.set_footer(text=f"help page {hpage}/2")
-        c = json.load(open("json/serverconfig.json", 'r'))
-        p = c[str(ctx.guild.id)]["prefix"]
+        #c = json.load(open("json/serverconfig.json", 'r'))
+        c_f = afs.afs_memory("db.afs")
+        c = c_f.j_load
+        p = c["serverconfig"][str(ctx.guild.id)]["prefix"]
 
         if hpage == "1":
             embed.add_field(name=f'{p}setPrefix <prefix>', value="Change prefix", inline=True)
@@ -55,7 +58,7 @@ class help(commands.Cog):
             lang = get_guild_lang(ctx.guild.id)
             with open("json/ahelp.json", 'r') as f:
                 ahelp = json.load(f)
-            
+
             found = False
             for cmd in ahelp[lang]:
                 if cmdn in ahelp[lang]:

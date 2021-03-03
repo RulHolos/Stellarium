@@ -74,7 +74,15 @@
     "CmdCheckError": "Cette commande n'est pas activ\u00E9e sur ce serveur.",
     "ToggleCmdNotSupported": "Vous ne pouvez pas activer/d\u00E9sactiver cette commande.",
     "ToggleCmdUpdated": "Status de la commande mis \u00E0 jour.",
-    "CmdDontExists": "Cette commande n'existe pas."
+    "CmdDontExists": "Cette commande n'existe pas.",
+    "interphone_dial": "Recherche d'un serveur en cours... :clock3:",
+    "interphone_found": "Serveur trouv\u00E9, connect\u00E9 \u00E0",
+    "phonetoggle": "La vision de votre serveur au t\u00E9l\u00E9phone a bien \u00E9t\u00E9 modifi\u00E9e.",
+    "interphone_404": "Aucun autre serveur n'est \u00E9ligible \u00E0 l'interphone inter-serveurs. Pardon ^^'",
+    "phone_connected": "Le serveur suivant vous appelle :",
+    "phone_already_connected": "Vous avez d\u00E9j\u00E0 une connexion en cours.",
+    "phone_no_connexion_currently": "Vous n'avez aucune connexion en cours.",
+    "phone_hang_up": "Vous avez \u00E9t\u00E9 d\u00E9connect\u00E9 de"
   },
 
   "en" : {
@@ -152,6 +160,14 @@
     "CmdCheckError": "This command is not available on this server.",
     "ToggleCmdNotSupported": "This command cannot be turned on or off on your server.",
     "ToggleCmdUpdated": "Command status updated.",
-    "CmdDontExists": "This command doesn't exists."
+    "CmdDontExists": "This command doesn't exists.",
+    "interphone_dial": "Searching a server... :clock3:",
+    "interphone_found": "Server found, connected to",
+    "phonetoggle": "Your server visibility in the phone system has been changed correctly.",
+    "interphone_404": "No other server can receive calls. Sorry ^^'",
+    "phone_connected": "This server is calling you : ",
+    "phone_already_connected": "You are already connected to a server.",
+    "phone_no_connexion_currently": "You don't have any calls in progress.",
+    "phone_hang_up": "You have been disconnected from"
   }
 }

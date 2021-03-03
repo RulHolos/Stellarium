@@ -7,11 +7,12 @@ from discord.ext.commands import has_permissions
 
 from .errors import CmdCheckError, DebugCheckError
 from .config import debug_value
+from .afs_memory import afs_memory as afs
 
 def cmdcheck(cmd:str):
     """
     Checking the state of a cmd in the ctx server
-    
+
     Parameters
     ----------
     cmd: :class:`str`
@@ -28,10 +29,12 @@ def cmdcheck(cmd:str):
         The check fails.
     """
     def predicate_cmd(ctx):
-        with open("json/serverconfig.json", 'r') as f:
-            conf = json.load(f)
+        #with open("json/serverconfig.json", 'r') as f:
+        #    conf = json.load(f)
+        c_f = afs("db.afs")
+        conf = c_f.j_load
             # Si la commande voulue est présente dans le dict, alors on renvois true
-        if cmd.lower() in conf[str(ctx.guild.id)]["cmds"]:
+        if cmd.lower() in conf["serverconfig"][str(ctx.guild.id)]["cmds"]:
             raise CmdCheckError()
             #return False
         else:
@@ -45,7 +48,7 @@ def debugcheck():
     -------
     :bool:`True`
         The debug mod is bot-wide active.
-    
+
     Raises
     ------
     helpers.error.DebugCheckError

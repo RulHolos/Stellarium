@@ -7,3 +7,7 @@ time
 secrets
 pybooru
 argparse==1.4.0
+python-benedict
+Cryptography
+termcolor
+requests

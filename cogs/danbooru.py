@@ -15,7 +15,7 @@ class danbooru(commands.Cog):
         found = False
         while not found:
             try:
-                posts = dan.post_list(limit=2, random=True, tags=str(tag or "Hololive"))
+                posts = dan.post_list(limit=2, random=True, tags=str(tag or "moth_girl"))
                 lst = []
                 for post in posts:
                     lst.append(post['file_url'])

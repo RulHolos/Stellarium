@@ -17,10 +17,10 @@ class template(commands.Cog):
         if not name:
             name = ctx.guild.name
         name = name.replace(" ", "_").lower()
-        with open(f"templates/{name}.afs", "w") as f:
+        with open(f"templates/{name}.tafs", "w") as f:
             f.write("{}")
 
-        with open(f"templates/{name}.afs", "r") as f:
+        with open(f"templates/{name}.tafs", "r") as f:
             data = json.load(f)
         g = ctx.guild
         data[name] = {}
@@ -60,13 +60,13 @@ class template(commands.Cog):
 
         # Paramètres guild
         data[name]["Params_guild"]["description"] = g.description
-                
-        with open(f"templates/{name}.afs", "w") as f:
+
+        with open(f"templates/{name}.tafs", "w") as f:
             json.dump(data, f, indent=2)
-        
+
         await ctx.send(
             get_lang(str(ctx.guild.id), "template_create_send"),
-            file=File(f'templates/{name}.afs')
+            file=File(f'templates/{name}.tafs')
             )
 
 
