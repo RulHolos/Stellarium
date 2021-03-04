@@ -31,7 +31,7 @@ class pickle_afs_object:
 class afs_memory:
     def __init__(self, file):
         self.file = file
-        self.key = Fernet("Generate your own fernet key")
+        self.key = Fernet("Generate your own fernet key plz.")
 
         with open(self.file, 'rb') as enfile:
             self.enf = enfile.read()

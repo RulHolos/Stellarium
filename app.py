@@ -116,6 +116,7 @@ async def on_guild_join(guild):
     conf["serverconfig"][Iguild]["creator"] = guild.owner.id
     conf["serverconfig"][Iguild]["prefix"] = get_default_prefix()
     conf["serverconfig"][Iguild]["cmds"] = {}
+    conf["serverconfig"][Iguild]["interphone"] = False
 
     c_f.write_json_to_afs(c_f.j_load, conf)
 
@@ -140,31 +141,31 @@ async def on_message(message):
         await message.channel.send("Raep time!")
     await client.process_commands(message)
 
-#@client.event
-#async def on_command_error(ctx, error):
- #   """ Handling errors """
+@client.event
+async def on_command_error(ctx, error):
+    """ Handling errors """
 
-    #if isinstance(error, commands.CheckFailure): # Si une permission d'une has_permissions n'est pas remplie
-     #   await ctx.send(get_lang(str(ctx.guild.id), "CheckFailure"))
+    if isinstance(error, commands.CheckFailure): # Si une permission d'une has_permissions n'est pas remplie
+        await ctx.send(get_lang(str(ctx.guild.id), "CheckFailure"))
 
-    #if isinstance(error, commands.BadArgument): # Une commande a un mauvais argument.
-     #   await ctx.send(get_lang(str(ctx.guild.id), "BadArgument"))
+    if isinstance(error, commands.BadArgument): # Une commande a un mauvais argument.
+        await ctx.send(get_lang(str(ctx.guild.id), "BadArgument"))
 
-    #if isinstance(error, commands.CommandNotFound): # Une commande n'est pas trouvée.
-     #   await ctx.send(f'{get_lang(str(ctx.guild.id), "CommandNotFound")} : `{ctx.message.content}`')
+    if isinstance(error, commands.CommandNotFound): # Une commande n'est pas trouvée.
+        await ctx.send(f'{get_lang(str(ctx.guild.id), "CommandNotFound")} : `{ctx.message.content}`')
 
     ### Custom errors (from helpers.errors) ###
 
-    #if isinstance(error, CmdCheckError): # Une commande n'est pas utilisable sur un serveur
-     #   await ctx.send(get_lang(str(ctx.guild.id), "CmdCheckError"))
+    if isinstance(error, CmdCheckError): # Une commande n'est pas utilisable sur un serveur
+        await ctx.send(get_lang(str(ctx.guild.id), "CmdCheckError"))
 
-    #if isinstance(error, DebugCheckError): # Le mode global debug n'est pas activé sur le bot
-     #   await ctx.send(get_lang(str(ctx.guild.id), "Debug_Check"))
+    if isinstance(error, DebugCheckError): # Le mode global debug n'est pas activé sur le bot
+        await ctx.send(get_lang(str(ctx.guild.id), "Debug_Check"))
 
-    #if isinstance(error, RuntimeError):
-     #   pass
+    if isinstance(error, RuntimeError):
+        pass
 
-    #print(error)
+    print(error)
 
 # # # Commandes # # #
 

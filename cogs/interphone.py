@@ -1,5 +1,6 @@
 import discord, json, secrets, random, re, requests
 from discord.ext import commands
+from discord.ext.commands import has_permissions
 
 from helpers.config import get_lang
 from helpers.checks import cmdcheck
@@ -71,6 +72,7 @@ class interphone(commands.Cog):
 
     @commands.command()
     @cmdcheck("phone")
+    @has_permissions(manage_channels=True)
     async def phonetoggle(self, ctx):
         c_f = afs.afs_memory("db.afs")
         guildjson = c_f.j_load
@@ -106,7 +108,23 @@ class interphone(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         """ Ecoute des messages de l'interphone """
-        pass
+        if message.author.id == 746348869574459472:
+            pass
+        elif message.channel.name != "stellarium-phone":
+            pass
+        elif message.guild in self.connectes:
+            for conn in self.conn_pairs:
+                if message.guild in conn:
+                    if conn.index(message.guild) == 1:
+                        other_server = conn[0]
+                    else:
+                        other_server = conn[1]
+                    channels = await other_server.fetch_channels()
+                    for channel in channels:
+                        if channel.name == "stellarium-phone":
+                            await channel.send(f":loudspeaker: {message.author.name} : {message.content}")
+        else:
+            pass
 
 
 def setup(client):

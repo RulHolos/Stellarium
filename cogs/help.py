@@ -44,6 +44,9 @@ class help(commands.Cog):
             embed.add_field(name=f'{p}nocmd', value=get_lang(guild, "help_19"), inline=True)
             embed.add_field(name=f'{p}ahelp <cmd>', value=get_lang(guild, "help_20"), inline=True)
             embed.add_field(name=f'{p}anime <anime>', value=get_lang(guild, "help_21"), inline=True)
+            embed.add_field(name=f'{p}interphone', value=get_lang(guild, "help_22"), inline=True)
+            embed.add_field(name=f'{p}phonetoggle', value=get_lang(guild, "help_23"), inline=True)
+            embed.add_field(name=f'{p}hang_up', value=get_lang(guild, "help_24"), inline=True)
             await ctx.send(embed=embed)
         else:
             await ctx.send(get_lang(guild, "PageDontExists"))
