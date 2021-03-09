@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<!DOCTYPE html>
+    <div class="container-fluid" style="margin-top:30px">
+        <a href="{{ url_for('home') }}" class="btn btn-info" role="button" style="margin-bottom: 20px;"><-- Revenir au menu précédent</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card" style="box-shadow: 3px 3px 4px #888888; margin-bottom: 20px;">
+                    <div class="card-body">
+                        <h4 class="card-title" style="text-shadow: 1px 1px 5px #ffffff;"><b>{{ guild.name }}</b></h4>
+                        <img src="{{ guild.icon_url }}" style="border-radius: 100%; width: 100px;"/>
+                        <p class="card-text" style="padding-top: 10px;">Guild ID : <b>{{ guild_id }}</b><br>
+                        Langue : <b>{{ guild.lang }}</b><br>
+                        Préfix des commandes : <b>{{ guild.prefix }}</b><br>
+                        Commandes désactivées : <b>{{ cmds }}</b><br>
+                        Interphone : <b>{{ guild.interphone }}</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <a href="{{ url_for('toggle_interphone', guild_id=guild_id) }}" class="btn btn-info" style="margin-bottom: 20px;">Toggle l'interphone</a>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                Changer la langue
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="{{ url_for('change_lang', guild_id=guild_id, lang='fr') }}">Français</a>
+                              <a class="dropdown-item" href="{{ url_for('change_lang', guild_id=guild_id, lang='en') }}">English</a>
+                              <a class="dropdown-item disabled" href="#">Rai</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        <h4>Activer/Désactiver des commandes :</h4>
+                <div style="border: 2px solid grey; border-radius: 3px; overflow-y: scroll; height: 440px; padding: 10px; margin-bottom: 25px;">
+                    {% for c in listcmds %}
+                    <div class="card" style="box-shadow: 3px 3px 4px #888888; margin-bottom: 20px;">
+                        <div class="card-body">
+                            Commande : <b>{{ c }}</b><br>
+                            <a href="{{ url_for('toggle_cmds', guild_id=guild_id, cmd=c) }}" class="btn btn-info" style="margin-top: 20px;">Toggle {{ c }}</a>
+                        </div> 
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr class="d-sm-none">
+        </div>
+    </div>
+{% endblock content %}

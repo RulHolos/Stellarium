@@ -1,9 +1,10 @@
-import os, json, asyncio, aiohttp, discord, configparser
+import os, json, asyncio, aiohttp, discord, configparser, random
 from discord.ext import commands, tasks
 from discord.utils import get
 from itertools import cycle
 from discord import *
 from discord.ext.commands import has_permissions
+from datetime import datetime
 from .afs_memory import afs_memory as afs
 
 con = configparser.ConfigParser(converters={'list': lambda x: [i.strip() for i in x.split(',')]}, allow_no_value=True)
@@ -95,3 +96,16 @@ async def get_prefix(client, message):
         return conf1["serverconfig"][str(guild.id)]["prefix"]
     else:
         return get_default_prefix()
+
+def store_activities(data):
+    with open("json/activities.json", 'r') as f:
+        act = json.load(f)
+
+    data["date"] = datetime.now().strftime('%A %B at %H:%M')
+    r = str(random.randint(0, 99999))
+    while r in act:
+        r = str(random.randint(0, 99999))
+    act[r] = data
+    with open("json/activities.json", 'w') as f:
+        json.dump(act, f, indent=2)
+    

@@ -59,14 +59,13 @@ class interphone(commands.Cog):
 
                 await phone_channels[0].send(f'{get_lang(conn_act[0].id, "phone_connected")} {conn_act[1]}')
                 await phone_channels[1].send(f'{ctx.message.author.mention}, {get_lang(ctx.guild.id, "interphone_found")} {conn_act[0]}')
-
-                # id de connexions : servers = conn_act, channels = phone_channels
                 
                 if not [conn_act[0], conn_act[1]] in self.conn_pairs:
                     self.conn_pairs.append([conn_act[0], conn_act[1]])
                 else:
                     await ctx.send(get_lang(ctx.guild.id, "phone_already_connected"))
-                for i in range(0,2):
+
+                for i in range(0,2): # Gestion des conn_act pour les deux groupes
                     self.connectes.append(conn_act[i])
 
 

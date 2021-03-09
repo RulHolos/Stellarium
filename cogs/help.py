@@ -1,7 +1,7 @@
 import discord, re, json
 from discord.ext import commands
 
-from helpers.config import get_lang, get_prefix, get_guild_lang
+from helpers.config import get_lang, get_prefix, get_guild_lang, store_activities
 import helpers.afs_memory as afs
 
 class help(commands.Cog):

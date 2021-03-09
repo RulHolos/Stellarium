@@ -10,6 +10,10 @@ class template(commands.Cog):
         self.client = client
 
     @commands.command()
+    async def write_template(self, ctx):
+        pass
+
+    @commands.command()
     @has_permissions(administrator=True)
     async def create_template(self, ctx, *, name=""):
         """Créer une template des salons de votre serveur (doit être admin)

@@ -7,3 +7,4 @@ logs/
 json/guilds.json
 json/serverconfig.json
 workspaceStellarium.code-workspace
+!launch.bat

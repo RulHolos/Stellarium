@@ -2,7 +2,7 @@ import discord, json
 from discord.ext import commands
 from discord.ext.commands import has_permissions
 
-from helpers.config import get_lang
+from helpers.config import get_lang, store_activities
 import helpers.afs_memory as afs
 
 class setLang(commands.Cog):
@@ -29,6 +29,12 @@ class setLang(commands.Cog):
             #    json.dump(conf, sConfSave, indent=2)
             c_f.write_json_to_afs(c_f.j_load, conf)
             await ctx.send(f'{get_lang(guild, "SetLangSuccess")} `{language or "en"}`!')
+
+        store_activities({
+            "g_name": ctx.guild.name,
+            "cmd": "setLang",
+            "desc": f"Langue changée pour {language}"
+        })
 
 def setup(client):
     client.add_cog(setLang(client))

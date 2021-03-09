@@ -1,8 +1,8 @@
 # Stellarium
 # Fait pour tourner en version 1.4.1 du module discord.
 
-import discord, asyncio, datetime, json, random, os, aiohttp, configparser
-from discord.ext import commands, tasks
+import discord, asyncio, datetime, json, random, os, aiohttp, configparser, subprocess
+from discord.ext import commands, tasks, ipc
 from discord.utils import get
 from itertools import cycle
 from discord import *
@@ -19,6 +19,7 @@ client = commands.AutoShardedBot(command_prefix=get_prefix)
 client.remove_command('help')
 con = configparser.ConfigParser(converters={'list': lambda x: [i.strip() for i in x.split(',')]}, allow_no_value=True)
 con.read("config.ini")
+client.ipc = ipc.Server(client, secret_key="ba41339cd8869fcf8608937a5c4eb79812")
 
 
 # # # Variables # # #
@@ -101,6 +102,29 @@ def on_ready_print():
 async def on_ready():
     os.system('cls')
     on_ready_print()
+    c_f = afs.afs_memory("db.afs")
+    conf = c_f.j_load
+    for key, serv in conf["serverconfig"].items():
+        g = client.get_guild(int(key))
+        if conf["serverconfig"][key].get("name") is None:
+            conf["serverconfig"][key]["name"] = g.name
+            c_f.write_json_to_afs(c_f.j_load, conf)
+        elif conf["serverconfig"][key]["name"] != g.name:
+            conf["serverconfig"][key]["name"] = g.name
+            c_f.write_json_to_afs(c_f.j_load, conf)
+        else:
+            pass
+    print("Check des noms de serveurs terminé.")
+    for key, serv in conf["serverconfig"].items():
+        g = client.get_guild(int(key))
+        if conf["serverconfig"][key].get("icon_url") is None:
+            conf["serverconfig"][key]["icon_url"] = str(g.icon_url)
+            c_f.write_json_to_afs(c_f.j_load, conf)
+        else:
+            pass
+    print("Check des icones de serveur terminé.")
+    print(" ")
+    subprocess.Popen('launch.bat', creationflags=subprocess.CREATE_NEW_CONSOLE)
 
     await client.change_presence(activity=discord.Game(f'{get_bot_version()} | ;help'))
     #change_status.start()
@@ -117,6 +141,8 @@ async def on_guild_join(guild):
     conf["serverconfig"][Iguild]["prefix"] = get_default_prefix()
     conf["serverconfig"][Iguild]["cmds"] = {}
     conf["serverconfig"][Iguild]["interphone"] = False
+    conf["serverconfig"][Iguild]["name"] = guild.name
+    conf["serverconfig"][Iguild]["icon"] = guild.icon
 
     c_f.write_json_to_afs(c_f.j_load, conf)
 
@@ -167,6 +193,13 @@ async def on_command_error(ctx, error):
 
     print(error)
 
+@client.event
+async def on_ipc_ready():
+    """Called upon the IPC Server being ready"""
+    print("Ipc is ready.")
+    #from dashboard import dashboard
+    #dashboard.run(debug=True, host="0.0.0.0", port="80")
+
 # # # Commandes # # #
 
 @client.command()
@@ -192,5 +225,5 @@ async def changelog(ctx, version=""):
 for cmd in cmds:
     client.load_extension(f"cogs.{cmd}")
 
-
+client.ipc.start()
 client.run(open("token.txt", "r").read())

@@ -1,0 +1,44 @@
+{
+  "83329": {
+    "g_name": "Test bots",
+    "cmd": "help",
+    "desc": "Commande ex\u00e9cut\u00e9e avec succ\u00e8s.",
+    "date": "Monday March at 14:18"
+  },
+  "28652": {
+    "g_name": "Test bots",
+    "cmd": "help",
+    "desc": "Commande ex\u00e9cut\u00e9e avec succ\u00e8s.",
+    "date": "Monday March at 14:30"
+  },
+  "35329": {
+    "g_name": "Test bots",
+    "cmd": "help",
+    "desc": "Commande ex\u00e9cut\u00e9e avec succ\u00e8s.",
+    "date": "Monday March at 14:33"
+  },
+  "37559": {
+    "g_name": "Devanagara",
+    "cmd": "help",
+    "desc": "Commande ex\u00e9cut\u00e9e avec succ\u00e8s.",
+    "date": "Monday March at 14:34"
+  },
+  "80760": {
+    "g_name": "Test bots",
+    "cmd": "setLang",
+    "desc": "Langue chang\u00e9e pour fr",
+    "date": "Monday March at 18:07"
+  },
+  "29848": {
+    "g_name": "Test bots",
+    "cmd": "setLang",
+    "desc": "Langue chang\u00e9e pour en",
+    "date": "Monday March at 18:08"
+  },
+  "48649": {
+    "g_name": "Test bots",
+    "cmd": "setLang",
+    "desc": "Langue chang\u00e9e pour fr",
+    "date": "Monday March at 18:08"
+  }
+}
