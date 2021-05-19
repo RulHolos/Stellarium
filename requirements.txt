@@ -1,5 +1,4 @@
 discord.py==1.4.1
-pendulum
 aiohttp
 datetime
 uuid

@@ -40,5 +40,17 @@
     "cmd": "setLang",
     "desc": "Langue chang\u00e9e pour fr",
     "date": "Monday March at 18:08"
+  },
+  "49072": {
+    "g_name": "Test bots",
+    "cmd": "setLang",
+    "desc": "Langue chang\u00e9e pour en. Dashboard edit.",
+    "date": "Tuesday March at 18:57"
+  },
+  "84090": {
+    "g_name": "Test bots",
+    "cmd": "setLang",
+    "desc": "Langue chang\u00e9e pour fr. Dashboard edit.",
+    "date": "Tuesday March at 18:58"
   }
 }

@@ -85,7 +85,8 @@
     "phone_connected": "Le serveur suivant vous appelle :",
     "phone_already_connected": "Vous avez d\u00E9j\u00E0 une connexion en cours.",
     "phone_no_connexion_currently": "Vous n'avez aucune connexion en cours.",
-    "phone_hang_up": "Vous avez \u00E9t\u00E9 d\u00E9connect\u00E9 de"
+    "phone_hang_up": "Vous avez \u00E9t\u00E9 d\u00E9connect\u00E9 de",
+    "premium": "Si vous voulez avoir les aventages premium, consid\u00E9rez mon Patreon : https://www.patreon.com/ataekurri"
   },
 
   "en" : {
@@ -174,6 +175,7 @@
     "phone_connected": "This server is calling you : ",
     "phone_already_connected": "You are already connected to a server.",
     "phone_no_connexion_currently": "You don't have any calls in progress.",
-    "phone_hang_up": "You have been disconnected from"
+    "phone_hang_up": "You have been disconnected from",
+    "premium": "If you want to become a premium member, consider my Patreon : https://www.patreon.com/ataekurri"
   }
 }

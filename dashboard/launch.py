@@ -1,15 +1,32 @@
-import os, json, asyncio, configparser
+import os, json, asyncio, configparser, random
 from quart import Quart, render_template, url_for, flash, redirect, request, abort, jsonify, send_file
-from discord.ext import ipc
+from quart_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
 import afs_memory as afs
+from datetime import datetime
 
 dashboard = Quart(__name__)
-ipc_client = ipc.Client(
-    secret_key="ba41339cd8869fcf8608937a5c4eb79812"
-)
 __maintainer__ = "Atae Kurri <hakussura@protonmail.com>"
-#dashboard.config['SECRET_KEY'] = 'ba41339cd8869fcf8608937a5c4eb79812'
+dashboard.config['SECRET_KEY'] = 'ba41339cd8869fcf8608937a5c4eb79812'
+dashboard.config["DISCORD_CLIENT_ID"] = 746348869574459472
+dashboard.config["DISCORD_CLIENT_SECRET"] = "CS-Lv5JPoEn6gFUrrCT3sp1iedt3Mzw3"
+dashboard.config["DISCORD_REDIRECT_URI"] = "http://localhost/"
+dashboard.config["DISCORD_BOT_TOKEN"] = open("././token.txt").read()
+
+discord = DiscordOAuth2Session(dashboard)
+
 dashboard.static_folder = 'static'
+
+def store_activities(data):
+    with open("././json/activities.json", 'r') as f:
+        act = json.load(f)
+
+    data["date"] = datetime.now().strftime('%A %B at %H:%M')
+    r = str(random.randint(0, 99999))
+    while r in act:
+        r = str(random.randint(0, 99999))
+    act[r] = data
+    with open("././json/activities.json", 'w') as f:
+        json.dump(act, f, indent=2)
 
 #@dashboard.context_processor
 #def utility_processor():
@@ -25,7 +42,6 @@ dashboard.static_folder = 'static'
 #                conf["serverconfig"][guild_id]["interphone"] = True
 #                c_f.write_json_to_afs(c_f.j_load, conf)
 #    return dict(toggle_serv_conf=toggle_serv_conf)
-
 
 @dashboard.route('/')
 async def home():
@@ -49,6 +65,19 @@ async def home():
                 k = key
         activities[guild]["icon_url"] = conf["serverconfig"][k]["icon_url"]
     return await render_template('home.html', title="Dashboard", servs=conf["serverconfig"], activities=activities)
+
+@dashboard.route("/login/")
+async def login():
+    return await discord.create_session()
+
+@dashboard.route("/callback/")
+async def callback():
+    await discord.callback()
+    return redirect(url_for("home"))
+    
+@dashboard.errorhandler(Unauthorized)
+async def redirect_unauthorized(e):
+    return redirect(url_for("login"))
 
 @dashboard.route('/guild', methods=['GET', 'POST'])
 async def guild():
@@ -105,6 +134,12 @@ async def change_lang():
 
     conf["serverconfig"][guild_id]["lang"] = lang
     c_f.write_json_to_afs(c_f.j_load, conf)
+
+    store_activities({
+            "g_name": conf["serverconfig"][guild_id]["name"],
+            "cmd": "setLang",
+            "desc": f"Langue changée pour {lang}. Dashboard edit."
+    })
 
     return redirect(url_for('guild', guild_id=guild_id))
 
